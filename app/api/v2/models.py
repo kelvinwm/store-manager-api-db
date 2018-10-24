@@ -12,26 +12,26 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "NOCSNDOCNnocnsodi"
 
 
-# def login_required(func):
-#     """Decode tokem"""
-#
-#     @functools.wraps(func)
-#     def user_auth(*args, **kwargs):
-#         token = None
-#
-#         if 'access-token' in request.headers:
-#             token = request.headers['access-token']
-#         if not token:
-#             return "No token"
-#         try:
-#             data = jwt.decode(token, app.config["SECRET_KEY"])
-#             current_user = data['username']
-#         except:
-#             return "Token is invalid"
-#
-#         return func(current_user, *args, **kwargs)
-#
-#     return user_auth
+def login_required(func):
+    """Decode tokem"""
+
+    @functools.wraps(func)
+    def user_auth(*args, **kwargs):
+        token = None
+
+        if 'access-token' in request.headers:
+            token = request.headers['access-token']
+        if not token:
+            return "No token"
+        try:
+            data = jwt.decode(token, app.config["SECRET_KEY"])
+            current_user = data['username']
+        except:
+            return "Token is invalid"
+
+        return func(current_user, *args, **kwargs)
+
+    return user_auth
 
 
 class Products:
