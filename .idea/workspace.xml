@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/tests/test_product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v2/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v2/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_init.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_product.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -64,8 +57,8 @@
       <file leaf-file-name="test_product.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/tests/test_product.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+            <state relative-caret-position="456">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -135,8 +128,8 @@
         <option value="$PROJECT_DIR$/app/api/v2/__init__.py" />
         <option value="$PROJECT_DIR$/app/api/v2/views.py" />
         <option value="$PROJECT_DIR$/app/api/v2/models.py" />
-        <option value="$PROJECT_DIR$/app/tests/test_product.py" />
         <option value="$PROJECT_DIR$/db_init.py" />
+        <option value="$PROJECT_DIR$/app/tests/test_product.py" />
       </list>
     </option>
   </component>
@@ -224,6 +217,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13616072" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -232,7 +226,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.80363035" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.80363035" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -681,8 +675,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/tests/test_product.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        <state relative-caret-position="456">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

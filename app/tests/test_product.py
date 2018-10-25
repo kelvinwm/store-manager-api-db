@@ -77,6 +77,3 @@ class TestProducts(unittest.TestCase):
         # res = self.app.get('/api/v2/products/2', data=json.dumps(self.data), headers=self.headers)
         # result = json.loads(res.data.decode('utf-8'))
         # self.assertEqual(result, {'Product': 'Product not found', 'status': 'OK'})
-
-    def tearDown(self):
-        drop()
