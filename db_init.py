@@ -1,4 +1,5 @@
 import psycopg2
+import sys
 import os
 
 
@@ -26,21 +27,12 @@ def tables():
     product = """CREATE TABLE IF NOT EXISTS products(
             ID  SERIAL PRIMARY KEY,
             product_name varchar(1000) NOT NULL UNIQUE,
-            description varchar(1000) NOT NULL,
+            category varchar(100) NOT NULL,
             quantity numeric NOT NULL,
             price  numeric NOT NULL,
             date_created  DATE
 
     )"""
-    # sales = """CREATE TABLE IF NOT EXISTS sales(
-    #         sale_id serial PRIMARY NOT NULL,
-    #         attendant_name VARCHAR(100) NOT NULL,
-    #         product_name VARCHAR(1000) NOT NULL,
-    #         quantity numeric NOT NULL,
-    #         price  numeric NOT NULL,
-    #         total_price  numeric NOT NULL,
-    #         date_created current_timestamp
-    # )"""
     users = """CREATE TABLE IF NOT EXISTS users(
              ID  SERIAL PRIMARY KEY,
             first_name VARCHAR(50) NOT NULL,
@@ -50,6 +42,29 @@ def tables():
             password VARCHAR(500) NOT NULL,
             date_created  DATE
     )"""
-    table_list = [product, users]
+    blacklist = """CREATE TABLE IF NOT EXISTS blacklists(
+             ID  SERIAL PRIMARY KEY,
+             token VARCHAR(500) NOT NULL,
+             date_created  DATE
+    )"""
+    categories = """CREATE TABLE IF NOT EXISTS categories(
+             ID  SERIAL PRIMARY KEY,
+             category VARCHAR(50) NOT NULL UNIQUE,
+             date_created  DATE
+    )"""
+    table_list = [product, users, blacklist, categories]
 
     return table_list
+
+
+def drop():
+    db1 = """DROP TABLE IF EXISTS products CASCADE"""
+    try:
+        conn = connection()
+        cur = conn.cursor()
+        cur.execute(db1)
+
+        cur.close()
+        cur.commit()
+    except psycopg2.Error:
+        raise SystemExit("Failed {}".format(sys.exc_info()))

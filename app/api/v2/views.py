@@ -1,9 +1,10 @@
-from flask import jsonify, make_response
-from flask_restful import Resource, reqparse
-from app.api.v2.models import Products, Users
+from flask import jsonify, make_response, Blueprint
+from flask_restful import Resource, reqparse, Api
+from app.api.v2.models import Products, Users, Categories
 
 product = Products()
 users = Users()
+category = Categories()
 
 
 class Products(Resource):
@@ -13,7 +14,7 @@ class Products(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument("product_name", required=True, help="Invalid entry", location=['json'])
         self.parser.add_argument("price", required=True, type=int, help="Invalid entry", location=['json'])
-        self.parser.add_argument("description", required=True, help="Invalid entry", location=['json'])
+        self.parser.add_argument("category", required=True, help="Invalid entry", location=['json'])
         self.parser.add_argument("quantity", required=True, type=int, help="Invalid entry", location=['json'])
         super().__init__()
 
@@ -34,7 +35,7 @@ class Product(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument("product_name", required=True, help="Invalid entry", location=['json'])
         self.parser.add_argument("price", required=True, type=int, help="Invalid entry", location=['json'])
-        self.parser.add_argument("description", required=True, help="Invalid entry", location=['json'])
+        self.parser.add_argument("category", required=True, help="Invalid entry", location=['json'])
         self.parser.add_argument("quantity", required=True, type=int, help="Invalid entry", location=['json'])
         super().__init__()
 
@@ -53,15 +54,62 @@ class Product(Resource):
 
 
 class UserLogin(Resource):
+    """A user can Login"""
     def post(self):
         return users.login()
 
 
 class UserSignup(Resource):
+    """Register a user"""
     def post(self):
-        return users.add_user()
+        return Users().add_user()
+
+
+class UserLogout(Resource):
+    """Log out a user"""
+    def get(self):
+        return users.log_out()
 
 
 class Home(Resource):
+    """Home page"""
     def get(self):
         return make_response(jsonify({"Message": " Welcome to store manager api"}), 200)
+
+
+class AllUserInformation(Resource):
+    """Get registered users"""
+    def get(self):
+        return users.get_all_users()
+
+
+class SingleUserInformation(Resource):
+    """Get and modify user"""
+    def get(self, user_id):
+        return users.get_one_user(user_id)
+
+    def put(self, user_id):
+        return users.update_user(user_id)
+
+
+class Categories(Resource):
+    """Create categories and read them"""
+    def post(self):
+        return category.add_category()
+
+    def get(self):
+        return category.get_all_categories()
+
+
+class SingleCategory(Resource):
+    """Modify and delete a category"""
+    def put(self, category_id):
+        return category.update_category(category_id)
+
+    def delete(self, category_id):
+        return category.delete_category(category_id)
+
+
+landing_page = Blueprint("landing_page", __name__)
+api = Api(landing_page)
+api.add_resource(Home, '/', endpoint="landing page")
