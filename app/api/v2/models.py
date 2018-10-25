@@ -459,7 +459,6 @@ class Categories:
         """Delete category"""
         if current_user != "true":
             return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
             }))
         try:
             cur = conn.cursor()
