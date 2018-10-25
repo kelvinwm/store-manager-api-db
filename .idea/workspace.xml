@@ -104,16 +104,16 @@
       <find>uni</find>
       <find>conn</find>
       <find>product</find>
-      <find>if not current_user</find>
+      <find />
       <find>conn.commit()</find>
       <find>conn.commit(</find>
-      <find>&quot;Permission denied</find>
-      <find>Permission denied</find>
+      <find />
+      <find />
       <find>description</find>
       <find>exce</find>
     </findStrings>
     <replaceStrings>
-      <replace>Permission denied.Contact Admin</replace>
+      <replace />
       <replace>category</replace>
     </replaceStrings>
   </component>
@@ -133,7 +133,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="484" />
     <option name="y" value="19" />
     <option name="width" value="697" />
