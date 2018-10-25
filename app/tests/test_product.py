@@ -61,13 +61,13 @@ class TestProducts(unittest.TestCase):
         result = json.loads(response.data.decode('utf-8'))
         self.assertEqual(result["Message"], "Item does not exist")
 
-    # def test_product_list_can_be_edited(self):
-    #     """TEST API can edit existing product list"""
-    #     result = self.app.put('/api/v2/products/2', data=json.dumps(self.data), headers=self.headers)
-    #     self.assertEqual(result.status_code, 200)
-    #     res = self.app.put('/api/v2/products/21', data=json.dumps(self.data_not_found), headers=self.headers)
-    #     result = json.loads(res.data.decode('utf-8'))
-    #     self.assertEqual(result["Message"], 'Product not found')
+    def test_product_list_can_be_edited(self):
+        """TEST API can edit existing product list"""
+        result = self.app.put('/api/v2/products/2', data=json.dumps(self.data), headers=self.headers)
+        self.assertEqual(result.status_code, 200)
+        res = self.app.put('/api/v2/products/21', data=json.dumps(self.data_not_found), headers=self.headers)
+        result = json.loads(res.data.decode('utf-8'))
+        self.assertEqual(result["Message"], 'Product not found')
 
     #
     def test_product_list_deletion(self):
