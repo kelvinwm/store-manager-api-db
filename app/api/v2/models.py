@@ -387,6 +387,32 @@ class Categories:
             }))
 
     @login_required
+    def update_category(self, category_id, current_user, token):
+        """Modify category"""
+        if Validate().admin_checker(current_user) != "true":
+            return Validate().admin_checker(current_user)
+        data = request.get_json()
+        if not data['category']:
+            return jsonify({"Message": "Invalid entry"})
+        try:
+            query = "SELECT * FROM categories WHERE id ='{0}'".format(category_id)
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return make_response(jsonify({
+                    "Message": "Category not found"
+                }), 200)
+            sql = """ UPDATE categories SET category = %s WHERE id = %s"""
+            cur.execute(sql, (data["category"], category_id))
+            conn.commit()
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": "Updated successfully"
+            }), 200)
+        except (Exception, psycopg2.DatabaseError) as error:
+            return error
+
+    @login_required
     def delete_category(self, category_id, current_user, token):
         """Delete category"""
         if Validate().admin_checker(current_user) != "true":
