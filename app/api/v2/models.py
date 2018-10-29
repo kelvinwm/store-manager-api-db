@@ -75,6 +75,34 @@ class Products:
                 "Message": error
             }))
 
+    @login_required
+    def add_product(self, current_user, token):
+        """add a product"""
+        if Validate().validate_product(current_user) != "true":
+            return Validate().validate_product(current_user)
+        data = request.get_json()
+        try:
+            insert_query = """INSERT INTO products (product_name, category, quantity, price, date_created) VALUES (%s,
+            %s,%s,%s,%s)"""
+            cur.execute("SELECT * FROM products WHERE product_name= '{0}'".format(data["product_name"]))
+            if cur.fetchone():
+                return jsonify({"Message": "Product already exists"})
+            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"]))
+            if not cur.fetchone():
+                return jsonify({"Message": "Invalid category"})
+            cur.execute(insert_query, (data["product_name"], data["category"], data["quantity"], data["price"], now))
+            conn.commit()
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": "Product added successfully"
+            }), 201)
+        except (Exception, psycopg2.DatabaseError) as error:
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": error
+            }))
+
+
 
 class Users:
     """Users class for registration and login"""
