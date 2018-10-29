@@ -134,7 +134,51 @@ class Products:
                 "Message": error
             }))
 
+    @login_required
+    def update_product(self, product_id, current_user, token):
+        """modify products"""
+        if Validate().validate_product(current_user) != "true":
+            return Validate().validate_product(current_user)
+        data = request.get_json()
+        try:
+            sql = """ UPDATE products SET product_name = %s ,category=%s, quantity=%s, price=%s WHERE id = %s"""
+            query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return make_response(jsonify({
+                    "Message": "Product not found"
+                }), 200)
+            cur.execute(sql, (data["product_name"], data["category"], data["quantity"], data["price"], product_id))
+            conn.commit()
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": "Updated successfully"
+            }), 200)
+        except (Exception, psycopg2.DatabaseError) as error:
+            return {"Error": "Unable to update product try again!"}
 
+    @login_required
+    def delete_product(self, product_id, current_user, token):
+        """delete a product"""
+        if Validate().admin_checker(current_user) != "true":
+            return Validate().admin_checker(current_user)
+        try:
+            cur.execute("SELECT * FROM products WHERE id= '{0}'".format(product_id))
+            if not cur.fetchone():
+                return jsonify({"Message": "Item does not exist"})
+            query = "DELETE FROM products WHERE id= '{0}'".format(product_id)
+            cur.execute(query)
+            conn.commit()
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": "Product deleted successfully"
+            }), 200)
+        except (Exception, psycopg2.DatabaseError) as error:
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": error
+            }))
 
 
 class Users:
