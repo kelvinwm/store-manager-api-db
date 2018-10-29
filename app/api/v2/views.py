@@ -9,35 +9,17 @@ category = Categories()
 
 class Products(Resource):
     """get all Products or post a product to the products list"""
-
-    def __init__(self):
-        self.parser = reqparse.RequestParser()
-        self.parser.add_argument("product_name", required=True, help="Invalid entry", location=['json'])
-        self.parser.add_argument("price", required=True, type=int, help="Invalid entry", location=['json'])
-        self.parser.add_argument("category", required=True, help="Invalid entry", location=['json'])
-        self.parser.add_argument("quantity", required=True, type=int, help="Invalid entry", location=['json'])
-        super().__init__()
-
     def get(self):
         """get all Products from products list"""
         return product.get_all_products()
 
     def post(self):
         """Add a product to the products list"""
-        args = self.parser.parse_args()
-        return product.add_product(**args)
+        return product.add_product()
 
 
 class Product(Resource):
     """get or update or delete a single product from the products list """
-
-    def __init__(self):
-        self.parser = reqparse.RequestParser()
-        self.parser.add_argument("product_name", required=True, help="Invalid entry", location=['json'])
-        self.parser.add_argument("price", required=True, type=int, help="Invalid entry", location=['json'])
-        self.parser.add_argument("category", required=True, help="Invalid entry", location=['json'])
-        self.parser.add_argument("quantity", required=True, type=int, help="Invalid entry", location=['json'])
-        super().__init__()
 
     def get(self, product_id):
         """get a single product from the products list """
@@ -45,8 +27,7 @@ class Product(Resource):
 
     def put(self, product_id):
         """update a single product from the products list """
-        args = self.parser.parse_args()
-        return product.update_product(product_id, **args)
+        return product.update_product(product_id)
 
     def delete(self, product_id):
         """delete a single product from the products list """

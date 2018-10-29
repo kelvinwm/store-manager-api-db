@@ -1,54 +1,55 @@
 import re
-
 import psycopg2
 from flask import make_response, jsonify, request, Flask
-from validate_email import validate_email
 from werkzeug.security import generate_password_hash, check_password_hash
 import functools
 import jwt
 import datetime
+
+from app.api.v2.utils import Validate
 from db_init import connection
 
 now = datetime.datetime.now()
 conn = connection()
+Token = None
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "NOCSNDOCNnocnsodi"
+cur = conn.cursor()
 
 
 def login_required(func):
     """Decode tokem"""
-    @functools.wraps(func)
-    def user_auth(*args, **kwargs):
-        token = None
 
+    @functools.wraps(func)
+    def user_auth(*args):
+        global token
         if 'access-token' in request.headers:
             token = request.headers['access-token']
-            cur = conn.cursor()
             cur.execute("SELECT * FROM blacklists WHERE token= '{0}'".format(token))
             if cur.fetchone():
-                return jsonify({"Message": "Token blacklisted, please login"})
+                return jsonify({"Message": "You are logged out, please login"})
         if not token:
             return "No token"
         try:
             data = jwt.decode(token, app.config["SECRET_KEY"])
             current_user = data['username']
-        except:
-            return "Token is invalid"
 
-        return func(current_user, token, *args, **kwargs)
+        except:
+            return {"Message": "Your time has expired, please login"}
+        return func(*args, current_user, token)
 
     return user_auth
 
 
 class Products:
     """Product functions"""
+
     @login_required
-    def get_all_products(current_user, token, self):
+    def get_all_products(self, current_user, token):
         """get all products"""
         products = []
         try:
-            cur = conn.cursor()
             cur.execute("SELECT id, product_name, category,  quantity, price, date_created from products")
             rows = cur.fetchall()
             if not rows:
@@ -75,29 +76,21 @@ class Products:
             }))
 
     @login_required
-    def add_product(current_user, token, self, **args):
+    def add_product(self, current_user, token):
         """add a product"""
-        if not args['category'] or not args['product_name'] or args['quantity'] < 1 or args['price'] < 1:
-            return jsonify({"Message": "Invalid entry"})
-        if args["price"] < 0:
-            return make_response(jsonify({
-                "Message": "price cannot be a negative number"
-            }), 200)
-        if args["quantity"] < 0:
-            return make_response(jsonify({
-                "Message": "Quantity cannot be a negative number"
-            }), 200)
+        if Validate().validate_product(current_user) != "true":
+            return Validate().validate_product(current_user)
+        data = request.get_json()
         try:
-            insert_query = """INSERT INTO products (product_name, category, quantity, price, date_created) VALUES (%s,%s,
-            %s,%s,%s)"""
-            cur = conn.cursor()
-            cur.execute("SELECT * FROM products WHERE product_name= '{0}'".format(args["product_name"]))
+            insert_query = """INSERT INTO products (product_name, category, quantity, price, date_created) VALUES (%s,
+            %s,%s,%s,%s)"""
+            cur.execute("SELECT * FROM products WHERE product_name= '{0}'".format(data["product_name"]))
             if cur.fetchone():
                 return jsonify({"Message": "Product already exists"})
-            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(args["category"]))
+            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"]))
             if not cur.fetchone():
                 return jsonify({"Message": "Invalid category"})
-            cur.execute(insert_query, (args["product_name"], args["category"], args["quantity"], args["price"], now))
+            cur.execute(insert_query, (data["product_name"], data["category"], data["quantity"], data["price"], now))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
@@ -110,12 +103,11 @@ class Products:
             }))
 
     @login_required
-    def get_one_product(current_user, token, self, product_id):
+    def get_one_product(self, product_id, current_user, token):
         """get one product"""
         products = []
         try:
-            query = "SELECT * FROM products WHERE id =" + str(product_id)
-            cur = conn.cursor()
+            query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
             cur.execute(query)
             rows = cur.fetchall()
             if not rows:
@@ -143,55 +135,35 @@ class Products:
             }))
 
     @login_required
-    def update_product(current_user, token, self, product_id, **kwargs):
+    def update_product(self, product_id, current_user, token):
         """modify products"""
-        if current_user != "true":
-            return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
-            }))
-        if not kwargs['category'] or not kwargs['product_name'] or kwargs['quantity'] < 1 or kwargs['price'] < 1:
-            return jsonify({"Message": "Invalid entry"})
-        if kwargs["price"] < 0:
-            return make_response(jsonify({
-                "Message": "price cannot be a negative number"
-            }), 200)
-        if kwargs["quantity"] < 0:
-            return make_response(jsonify({
-                "Message": "Quantity cannot be a negative number"
-            }), 200)
+        if Validate().validate_product(current_user) != "true":
+            return Validate().validate_product(current_user)
+        data = request.get_json()
         try:
             sql = """ UPDATE products SET product_name = %s ,category=%s, quantity=%s, price=%s WHERE id = %s"""
-            cur = conn.cursor()
-            query = "SELECT * FROM products WHERE id =" + str(product_id)
+            query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
             cur.execute(query)
             rows = cur.fetchall()
             if not rows:
                 return make_response(jsonify({
                     "Message": "Product not found"
                 }), 200)
-
-            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(kwargs["category"]))
-            if not cur.fetchone():
-                return jsonify({"Message": "Invalid category"})
-            cur.execute(sql, (kwargs["product_name"], kwargs["category"], kwargs["quantity"],
-                              kwargs["price"], product_id))
+            cur.execute(sql, (data["product_name"], data["category"], data["quantity"], data["price"], product_id))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
                 "Message": "Updated successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
-            return error
+            return {"Error": "Unable to update product try again!"}
 
     @login_required
-    def delete_product(current_user, token, self, product_id):
+    def delete_product(self, product_id, current_user, token):
         """delete a product"""
-        if current_user != "true":
-            return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
-            }))
+        if Validate().admin_checker(current_user) != "true":
+            return Validate().admin_checker(current_user)
         try:
-            cur = conn.cursor()
             cur.execute("SELECT * FROM products WHERE id= '{0}'".format(product_id))
             if not cur.fetchone():
                 return jsonify({"Message": "Item does not exist"})
@@ -211,50 +183,40 @@ class Products:
 
 class Users:
     """Users class for registration and login"""
+
     def login(self):
         """A user can login and get a token"""
         data = request.get_json()
         if not data or not data["email"] or not data["password"]:
             return jsonify({"Message": "Please enter all credentials"})
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM users WHERE email= '{0}'".format(data["email"]))
-        if cur.fetchone():
-            cur.execute("SELECT password FROM users WHERE email= '{0}'".format(data["email"]))
-            for row in cur.fetchall():
-                if check_password_hash(row[0], data["password"]):
-                    """generate token"""
-                    cur.execute("SELECT role FROM users WHERE email= '{0}'".format(data["email"]))
-                    for row in cur.fetchall():
-                        token = jwt.encode({"username": row[0], 'exp': datetime.datetime.utcnow()
-                                                                       + datetime.timedelta(minutes=60)},
+        cur.execute("SELECT password FROM users WHERE email= '{0}'".format(data["email"]))
+        for row in cur.fetchall():
+            if check_password_hash(row[0], data["password"]):
+                """generate token"""
+                cur.execute("SELECT role FROM users WHERE email= '{0}'".format(data["email"]))
+                for role in cur.fetchall():
+                    new_token = jwt.encode({"username": role[0], 'exp': datetime.datetime.utcnow()
+                                                                        + datetime.timedelta(minutes=60)},
                                            app.config["SECRET_KEY"])
-                        return jsonify({"Token": token.decode('UTF-8')})
+                    return jsonify({"Token": new_token.decode('UTF-8')})
         return jsonify({"Message": "Invalid credentials"})
 
     @login_required
-    def add_user(current_user, token, self):
+    def add_user(self, current_user, token):
         """A user can signup"""
-        if current_user != "true":
-            return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
-            }))
+        if Validate().validate_user(current_user) != "true":
+            return Validate().validate_user(current_user)
         data = request.get_json()
-        if not data["first_name"] or not data["password"] or not data["last_name"] or not data["email"]:
-            return make_response(jsonify({"message": "Please enter all credentials"}))
-
-        is_valid = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', data["email"])
-        if not is_valid or not re.match('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$])', data["password"]) \
-                or len(data["password"]) > 12:
-            return jsonify({"Message": "Invalid email or password"})
-
+        if not re.match('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$])', data["password"]):
+            return jsonify({"Message": "password should include a digit, Uppercase, lowercase and a special character"})
+        if len(data["password"]) < 8:
+            return jsonify({"Message": "Password should be at least 8 characters"})
         pws = data["password"]
         password = generate_password_hash(pws, method="sha256")
         try:
-            cur = conn.cursor()
             cur.execute("SELECT * FROM users WHERE email= '{0}'".format(data["email"]))
             if cur.fetchone():
                 return jsonify({"Message": "User already registered"})
-
             insert_query = """INSERT INTO users (first_name, last_name, email, role, password, date_created) VALUES
                          (%s,%s, %s,%s,%s,%s)"""
             cur.execute(insert_query, (data["first_name"], data["last_name"], data["email"], False, password, now))
@@ -269,14 +231,12 @@ class Users:
             }))
 
     @login_required
-    def log_out(curreent_user, token, self):
+    def log_out(self, current_user, token):
         """User logout"""
         try:
             insert_query = """INSERT INTO blacklists (token, date_created) VALUES (%s,%s)"""
-            cur = conn.cursor()
             cur.execute(insert_query, (token, now))
             conn.commit()
-            conn.close()
             return make_response(jsonify({"Message": "User logout successful"}), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
@@ -285,15 +245,12 @@ class Users:
             }))
 
     @login_required
-    def get_all_users(current_user, token, self):
+    def get_all_users(self, current_user, token):
         """A user can get all users"""
-        if current_user != "true":
-            return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
-            }))
+        if Validate().admin_checker(current_user) != "true":
+            return Validate().admin_checker(current_user)
         users = []
         try:
-            cur = conn.cursor()
             cur.execute("SELECT id, first_name, last_name, email, role, date_created from users")
             rows = cur.fetchall()
             if not rows:
@@ -320,12 +277,12 @@ class Users:
             }))
 
     @login_required
-    def get_one_user(current_user, token, self, user_id):
+    def get_one_user(self, user_id, current_user, token):
         """Get a single registered user by user_id"""
+        global one_user
         users = []
         try:
-            query = "SELECT * FROM users WHERE id =" + str(user_id)
-            cur = conn.cursor()
+            query = "SELECT * FROM users WHERE id ='{0}'".format(user_id)
             cur.execute(query)
             rows = cur.fetchall()
             if not rows:
@@ -333,17 +290,16 @@ class Users:
                     "Message": "User does not exist"
                 }), 200)
             for row in rows:
-                user = {
+                one_user = {
                     "Id": row[0],
                     "first_name": row[1],
                     "last_name": row[2],
                     "email": row[3],
                     "role": row[4]
                 }
-                users.append(user)
+                users.append(one_user)
             return make_response(jsonify({
-                "status": "OK",
-                "product": user
+                "User": one_user
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
@@ -352,22 +308,22 @@ class Users:
             }))
 
     @login_required
-    def update_user(current_user, token, self, user_id):
+    def update_user(self, user_id, current_user, token):
         """give admin right to a specific store attendant"""
-        if current_user != "true":
-            return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
-            }))
+        if Validate().validate_user(current_user) != "true":
+            return Validate().validate_user(current_user)
         data = request.get_json()
-        if not data["first_name"] or not data["last_name"] or not data["email"] or not data["role"]:
+        if not data["role"]:
             return make_response(jsonify({"message": "Please enter all credentials"}))
-
-        is_valid = validate_email(data["email"])
-        if not is_valid:
-            return jsonify({"Message": "Invalid email or password"})
         try:
+            query = "SELECT * FROM users WHERE id ='{0}'".format(user_id)
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return make_response(jsonify({
+                    "Message": "User not found"
+                }), 200)
             sql = """ UPDATE users SET first_name = %s ,last_name=%s, email=%s, role=%s WHERE id = %s"""
-            cur = conn.cursor()
             cur.execute(sql, (data["first_name"], data["last_name"], data["email"], data["role"], user_id))
             conn.commit()
             return make_response(jsonify({
@@ -382,11 +338,10 @@ class Categories:
     """Categories functions"""
 
     @login_required
-    def get_all_categories(current_user, token, self):
+    def get_all_categories(self, current_user, token):
         """Get all Categories"""
         categories = []
         try:
-            cur = conn.cursor()
             cur.execute("SELECT id, category, date_created from categories")
             rows = cur.fetchall()
             if not rows:
@@ -410,14 +365,13 @@ class Categories:
             }))
 
     @login_required
-    def add_category(current_user, token, self):
+    def add_category(self, current_user, token):
         """Create Category"""
         data = request.get_json()
         if not data or not data["category"]:
             return jsonify({"Message": "Invalid entry"})
         try:
             insert_query = """INSERT INTO categories (category, date_created) VALUES (%s,%s)"""
-            cur = conn.cursor()
             cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"]))
             if cur.fetchone():
                 return jsonify({"Message": "category already exists"})
@@ -433,18 +387,22 @@ class Categories:
             }))
 
     @login_required
-    def update_category(current_user, token, self, category_id):
+    def update_category(self, category_id, current_user, token):
         """Modify category"""
-        if current_user != "true":
-            return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
-            }))
+        if Validate().admin_checker(current_user) != "true":
+            return Validate().admin_checker(current_user)
         data = request.get_json()
         if not data['category']:
             return jsonify({"Message": "Invalid entry"})
         try:
+            query = "SELECT * FROM categories WHERE id ='{0}'".format(category_id)
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return make_response(jsonify({
+                    "Message": "Category not found"
+                }), 200)
             sql = """ UPDATE categories SET category = %s WHERE id = %s"""
-            cur = conn.cursor()
             cur.execute(sql, (data["category"], category_id))
             conn.commit()
             return make_response(jsonify({
@@ -455,14 +413,11 @@ class Categories:
             return error
 
     @login_required
-    def delete_category(current_user, token, self, category_id):
+    def delete_category(self, category_id, current_user, token):
         """Delete category"""
-        if current_user != "true":
-            return make_response(jsonify({
-                "Message": "Permission denied.Contact Admin"
-            }))
+        if Validate().admin_checker(current_user) != "true":
+            return Validate().admin_checker(current_user)
         try:
-            cur = conn.cursor()
             cur.execute("SELECT * FROM categories WHERE id= '{0}'".format(category_id))
             if not cur.fetchone():
                 return jsonify({"Message": "Item does not exist"})

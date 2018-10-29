@@ -11,14 +11,14 @@ def create_app():
     app.register_blueprint(landing_page)
 
     @app.errorhandler(404)
-    def not_found(e):
+    def not_found():
         # defining function
         return make_response(jsonify({
             "Message": "Route not found. Please check on the route"
         }), 200)
 
     @app.errorhandler(500)
-    def internal_error(error):
+    def internal_error():
         return make_response(jsonify({
             "Message": "Internal server"
         }), 200)

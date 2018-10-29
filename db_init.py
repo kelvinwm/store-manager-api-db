@@ -19,8 +19,7 @@ def create_tables():
 
     for table in list_of_tables:
         cur.execute(table)
-    conn.commit()
-    conn.close()
+        conn.commit()
 
 
 def tables():
@@ -57,14 +56,28 @@ def tables():
     return table_list
 
 
-def drop():
-    db1 = """DROP TABLE IF EXISTS products CASCADE"""
-    try:
-        conn = connection()
-        cur = conn.cursor()
-        cur.execute(db1)
+db1 = """DROP TABLE IF EXISTS products CASCADE"""
+delete = """DELETE """
 
-        cur.close()
-        cur.commit()
-    except psycopg2.Error:
-        raise SystemExit("Failed {}".format(sys.exc_info()))
+
+def drop_tables():
+    conn = connection()
+    cur = conn.cursor()
+    cur.execute(db1)
+    conn.commit()
+
+
+def delete_record(name):
+    query = "DELETE FROM users WHERE first_name = '{0}'".format(name)
+    conn = connection()
+    cur = conn.cursor()
+    cur.execute(query)
+    conn.commit()
+
+
+def delete_category(category):
+    query = "DELETE FROM categories WHERE category = '{0}'".format(category)
+    conn = connection()
+    cur = conn.cursor()
+    cur.execute(query)
+    conn.commit()
