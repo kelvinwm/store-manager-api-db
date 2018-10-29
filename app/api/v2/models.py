@@ -102,6 +102,39 @@ class Products:
                 "Message": error
             }))
 
+    @login_required
+    def get_one_product(self, product_id, current_user, token):
+        """get one product"""
+        products = []
+        try:
+            query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return make_response(jsonify({
+                    "Message": "Item does not exist"
+                }), 200)
+            for row in rows:
+                item = {
+                    "Id": row[0],
+                    "product_name": row[1],
+                    "category": row[2],
+                    "quantity": int(row[3]),
+                    "price": int(row[4]),
+                    "date": row[5]
+                }
+                products.append(item)
+            return make_response(jsonify({
+                "status": "OK",
+                "product": products
+            }), 200)
+        except (Exception, psycopg2.DatabaseError) as error:
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": error
+            }))
+
+
 
 
 class Users:
