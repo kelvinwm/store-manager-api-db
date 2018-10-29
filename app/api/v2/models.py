@@ -385,3 +385,24 @@ class Categories:
             return make_response(jsonify({
                 "Message": "Error entering category"
             }))
+
+    @login_required
+    def delete_category(self, category_id, current_user, token):
+        """Delete category"""
+        if Validate().admin_checker(current_user) != "true":
+            return Validate().admin_checker(current_user)
+        try:
+            cur.execute("SELECT * FROM categories WHERE id= '{0}'".format(category_id))
+            if not cur.fetchone():
+                return jsonify({"Message": "Item does not exist"})
+            query = "DELETE FROM categories WHERE id= '{0}'".format(category_id)
+            cur.execute(query)
+            conn.commit()
+            return make_response(jsonify({
+                "status": "OK",
+                "Message": "category deleted successfully"
+            }), 200)
+        except (Exception, psycopg2.DatabaseError) as error:
+            return make_response(jsonify({
+                "Message": "Error deleting category"
+            }))
