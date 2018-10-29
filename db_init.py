@@ -1,6 +1,4 @@
 import psycopg2
-import sys
-import os
 
 
 # db_url = os.getenv(url)
