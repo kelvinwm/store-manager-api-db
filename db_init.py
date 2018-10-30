@@ -1,10 +1,14 @@
 import psycopg2
+import os
 
 # db_url = os.getenv(url)
 
 def connection():
+
     # url = ""nlknl""
-    conn = psycopg2.connect(database="store", user="postgres", password="123", host="127.0.0.1", port="5432")
+    # conn = psycopg2.connect(database="store", user="postgres", password="123", host="127.0.0.1", port="5432")
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
     return conn
 
