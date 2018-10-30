@@ -1,16 +1,15 @@
-language: python
+language: 'python'
 python:
-  - "3.6"
-
-# command to install dependencies
+  - '3.5.2'
 install:
- - pip install -r requirements.txt
- - pip install coverage codev
- - pip install nose
+  - pip install -r requirements.txt
+env:
+  - DB = postgres USER = postgres PASSWORD = 'python'
 before_script:
- - psql -c ‘create database store;’ -U postgres
-# Run tests
+  - psql -c "CREATE DATABASE test;" -U postgres
+  - export ENV='testing'
 script:
-- nosetests --exe --with-coverage --cover-package=app
+  - pytest -v --cov=app/api
+  - coveralls
 after_success:
- - coveralls
+  - coveralls
