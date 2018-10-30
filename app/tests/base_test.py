@@ -27,3 +27,19 @@ class BaseTest(unittest.TestCase):
         self.product_not_found = {"product_name": "Revision", "category": "Longhorn", "quantity": 100, "price": 1500}
         self.product_err_data = {"product_name": "Revision English", "category": "Good book", "quantity": 100,
                                  "price": "dkls"}
+
+
+def teardown(self):
+    self.sign_up_data = None
+    self.login_data = None
+    self.invalid_sign_up_data = None
+    self.empty_login_data = None
+    self.invalid_login_data = None
+    self.result = None
+    self.token = None
+    self.headers = None
+    self.category = None
+    self.category_update = None
+    self.add_product = None
+    self.product_not_found = None
+    self.product_err_data = None

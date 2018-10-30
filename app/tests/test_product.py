@@ -48,3 +48,6 @@ class TestProducts(BaseTest):
         res = self.app.get('/api/v2/products/2', data=json.dumps(self.add_product), headers=self.headers)
         result = json.loads(res.data.decode('utf-8'))
         self.assertEqual(result["Message"], 'Item does not exist')
+
+    def test_s(self):
+        self.assertEqual(self.token,3)
