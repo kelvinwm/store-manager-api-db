@@ -52,6 +52,10 @@ class Sale(Resource):
         """Get a single sale by sale_id"""
         return sales.get_one_sale(sale_id)
 
+    def put(self, sale_id):
+        """Update a sale record"""
+        return sales.update_sale(sale_id)
+
 
 class UserLogin(Resource):
     """A user can Login"""
