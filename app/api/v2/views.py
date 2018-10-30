@@ -1,14 +1,17 @@
 from flask import jsonify, make_response, Blueprint
-from flask_restful import Resource, reqparse, Api
+from flask_restful import Resource, Api
 from app.api.v2.models import Products, Users, Categories
+from app.api.v2.sales import SalesModel
 
 product = Products()
 users = Users()
 category = Categories()
+sales = SalesModel()
 
 
 class Products(Resource):
     """get all Products or post a product to the products list"""
+
     def get(self):
         """get all Products from products list"""
         return product.get_all_products()
@@ -36,36 +39,42 @@ class Product(Resource):
 
 class UserLogin(Resource):
     """A user can Login"""
+
     def post(self):
         return users.login()
 
 
 class UserSignup(Resource):
     """Register a user"""
+
     def post(self):
         return Users().add_user()
 
 
 class UserLogout(Resource):
     """Log out a user"""
+
     def get(self):
         return users.log_out()
 
 
 class Home(Resource):
     """Home page"""
+
     def get(self):
         return make_response(jsonify({"Message": " Welcome to store manager api"}), 200)
 
 
 class AllUserInformation(Resource):
     """Get registered users"""
+
     def get(self):
         return users.get_all_users()
 
 
 class SingleUserInformation(Resource):
     """Get and modify user"""
+
     def get(self, user_id):
         return users.get_one_user(user_id)
 
@@ -75,6 +84,7 @@ class SingleUserInformation(Resource):
 
 class Categories(Resource):
     """Create categories and read them"""
+
     def post(self):
         return category.add_category()
 
@@ -84,6 +94,7 @@ class Categories(Resource):
 
 class SingleCategory(Resource):
     """Modify and delete a category"""
+
     def put(self, category_id):
         return category.update_category(category_id)
 

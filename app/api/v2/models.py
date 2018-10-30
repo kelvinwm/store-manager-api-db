@@ -32,9 +32,7 @@ def login_required(func):
         if not token:
             return "No token"
         try:
-            data = jwt.decode(token, app.config["SECRET_KEY"])
-            current_user = data['username']
-
+            current_user = jwt.decode(token, app.config["SECRET_KEY"])
         except:
             return {"Message": "Your time has expired, please login"}
         return func(*args, current_user, token)
@@ -78,8 +76,8 @@ class Products:
     @login_required
     def add_product(self, current_user, token):
         """add a product"""
-        if Validate().validate_product(current_user) != "true":
-            return Validate().validate_product(current_user)
+        if Validate().validate_product(current_user['role']) != "true":
+            return Validate().validate_product(current_user['role'])
         data = request.get_json()
         try:
             insert_query = """INSERT INTO products (product_name, category, quantity, price, date_created) VALUES (%s,
@@ -137,18 +135,13 @@ class Products:
     @login_required
     def update_product(self, product_id, current_user, token):
         """modify products"""
-        if Validate().validate_product(current_user) != "true":
-            return Validate().validate_product(current_user)
+        if Validate().validate_product(current_user['role']) != "true":
+            return Validate().validate_product(current_user['role'])
         data = request.get_json()
         try:
             sql = """ UPDATE products SET product_name = %s ,category=%s, quantity=%s, price=%s WHERE id = %s"""
-            query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
-            cur.execute(query)
-            rows = cur.fetchall()
-            if not rows:
-                return make_response(jsonify({
-                    "Message": "Product not found"
-                }), 200)
+            if Validate().find_product(product_id) != "true":
+                return Validate().find_product(product_id)
             cur.execute(sql, (data["product_name"], data["category"], data["quantity"], data["price"], product_id))
             conn.commit()
             return make_response(jsonify({
@@ -161,17 +154,15 @@ class Products:
     @login_required
     def delete_product(self, product_id, current_user, token):
         """delete a product"""
-        if Validate().admin_checker(current_user) != "true":
-            return Validate().admin_checker(current_user)
+        if Validate().admin_checker(current_user['role']) != "true":
+            return Validate().admin_checker(current_user['role'])
         try:
-            cur.execute("SELECT * FROM products WHERE id= '{0}'".format(product_id))
-            if not cur.fetchone():
-                return jsonify({"Message": "Item does not exist"})
+            if Validate().find_product(product_id) != "true":
+                return Validate().find_product(product_id)
             query = "DELETE FROM products WHERE id= '{0}'".format(product_id)
             cur.execute(query)
             conn.commit()
             return make_response(jsonify({
-                "status": "OK",
                 "Message": "Product deleted successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
@@ -195,8 +186,8 @@ class Users:
                 """generate token"""
                 cur.execute("SELECT role FROM users WHERE email= '{0}'".format(data["email"]))
                 for role in cur.fetchall():
-                    new_token = jwt.encode({"username": role[0], 'exp': datetime.datetime.utcnow()
-                                                                        + datetime.timedelta(minutes=60)},
+                    new_token = jwt.encode({"role": role[0], "username": data["email"],
+                                            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)},
                                            app.config["SECRET_KEY"])
                     return jsonify({"Token": new_token.decode('UTF-8')})
         return jsonify({"Message": "Invalid credentials"})
@@ -204,8 +195,8 @@ class Users:
     @login_required
     def add_user(self, current_user, token):
         """A user can signup"""
-        if Validate().validate_user(current_user) != "true":
-            return Validate().validate_user(current_user)
+        if Validate().validate_user(current_user['role']) != "true":
+            return Validate().validate_user(current_user['role'])
         data = request.get_json()
         if not re.match('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$])', data["password"]):
             return jsonify({"Message": "password should include a digit, Uppercase, lowercase and a special character"})
@@ -247,8 +238,8 @@ class Users:
     @login_required
     def get_all_users(self, current_user, token):
         """A user can get all users"""
-        if Validate().admin_checker(current_user) != "true":
-            return Validate().admin_checker(current_user)
+        if Validate().admin_checker(current_user['role']) != "true":
+            return Validate().admin_checker(current_user['role'])
         users = []
         try:
             cur.execute("SELECT id, first_name, last_name, email, role, date_created from users")
@@ -310,8 +301,8 @@ class Users:
     @login_required
     def update_user(self, user_id, current_user, token):
         """give admin right to a specific store attendant"""
-        if Validate().validate_user(current_user) != "true":
-            return Validate().validate_user(current_user)
+        if Validate().validate_user(current_user['role']) != "true":
+            return Validate().validate_user(current_user['role'])
         data = request.get_json()
         if not data["role"]:
             return make_response(jsonify({"message": "Please enter all credentials"}))
@@ -389,8 +380,8 @@ class Categories:
     @login_required
     def update_category(self, category_id, current_user, token):
         """Modify category"""
-        if Validate().admin_checker(current_user) != "true":
-            return Validate().admin_checker(current_user)
+        if Validate().admin_checker(current_user['role']) != "true":
+            return Validate().admin_checker(current_user['role'])
         data = request.get_json()
         if not data['category']:
             return jsonify({"Message": "Invalid entry"})
@@ -415,8 +406,8 @@ class Categories:
     @login_required
     def delete_category(self, category_id, current_user, token):
         """Delete category"""
-        if Validate().admin_checker(current_user) != "true":
-            return Validate().admin_checker(current_user)
+        if Validate().admin_checker(current_user['role']) != "true":
+            return Validate().admin_checker(current_user['role'])
         try:
             cur.execute("SELECT * FROM categories WHERE id= '{0}'".format(category_id))
             if not cur.fetchone():

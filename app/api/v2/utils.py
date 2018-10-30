@@ -1,10 +1,12 @@
 import re
 
+import psycopg2
 from flask import abort, request, make_response, jsonify
 from flask_restful import reqparse
 from db_init import connection
 
 conn = connection()
+cur = conn.cursor()
 
 
 class Validate:
@@ -31,7 +33,6 @@ class Validate:
             return make_response(jsonify({
                 "Message": "Quantity cannot be a negative number"
             }), 200)
-        cur = conn.cursor()
         cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(args["category"]))
         if not cur.fetchone():
             return jsonify({"Message": "Invalid category"})
@@ -55,4 +56,32 @@ class Validate:
             return make_response(jsonify({
                 "Message": "Permission denied.Contact Admin"
             }))
+        return "true"
+
+    def find_product(self, product_id):
+        try:
+            query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return make_response(jsonify({
+                    "Message": "Item does not exist"
+                }), 200)
+        except (Exception, psycopg2.DatabaseError) as error:
+            return make_response(jsonify({
+                "Message": "error finding item"
+            }))
+        return "true"
+
+    def validate_sale(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("product_name", required=True,
+                            help="Invalid entry", location=['json'])
+        parser.add_argument("quantity", required=True, type=int,
+                            help="Invalid entry", location=['json'])
+        args = parser.parse_args()
+        if args["quantity"] < 0:
+            return make_response(jsonify({
+                "Message": "Quantity cannot be a negative number"
+            }), 200)
         return "true"

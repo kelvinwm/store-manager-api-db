@@ -1,6 +1,5 @@
 import psycopg2
 
-
 # db_url = os.getenv(url)
 
 def connection():
@@ -30,6 +29,15 @@ def tables():
             date_created  DATE
 
     )"""
+    sales = """CREATE TABLE IF NOT EXISTS sales(
+            ID  SERIAL PRIMARY KEY,
+            username varchar(100) NOT NULL,
+            product_id varchar(100) NOT NULL,
+            quantity numeric NOT NULL,
+            price  numeric NOT NULL,
+            date_created  DATE
+
+    )"""
     users = """CREATE TABLE IF NOT EXISTS users(
              ID  SERIAL PRIMARY KEY,
             first_name VARCHAR(50) NOT NULL,
@@ -49,7 +57,7 @@ def tables():
              category VARCHAR(50) NOT NULL UNIQUE,
              date_created  DATE
     )"""
-    table_list = [product, users, blacklist, categories]
+    table_list = [product, sales, users, blacklist, categories]
 
     return table_list
 
