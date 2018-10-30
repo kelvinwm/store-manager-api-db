@@ -21,7 +21,7 @@ class BaseTest(unittest.TestCase):
         self.invalid_login_data = {"username": "kevo", "email": "prince@gmail.com", "password": "12ds9vs33"}
         self.result = self.app.post('/api/v2/auth/login', data=json.dumps(self.login_data),
                                     content_type='application/json')
-        self.token = json.loads(self.result.data.decode('utf-8'))
+        self.token = json.loads(self.result.data.decode('utf-8'))["Token"]
         self.headers = {'content-type': 'application/json', 'access-token': self.token}
         self.category = {"category": "KLB"}
         self.category_update = {"category": "CHEM"}
