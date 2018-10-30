@@ -47,6 +47,12 @@ class Sales(Resource):
         return sales.add_sale()
 
 
+class Sale(Resource):
+    def get(self, sale_id):
+        """Get a single sale by sale_id"""
+        return sales.get_one_sale(sale_id)
+
+
 class UserLogin(Resource):
     """A user can Login"""
 
