@@ -37,6 +37,12 @@ class Product(Resource):
         return product.delete_product(product_id)
 
 
+class Sales(Resource):
+    def post(self):
+        """create a new sale"""
+        return sales.add_sale()
+
+
 class UserLogin(Resource):
     """A user can Login"""
 
