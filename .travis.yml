@@ -8,7 +8,7 @@ install:
  - pip install coverage codev
  - pip install nose
 before_script:
-#  - export SECRET_KEY="NOCSNDOCNnocnsodi"
+ - psql -c ‘create database store;’ -U postgres
 # Run tests
 script:
 - nosetests --exe --with-coverage --cover-package=app
