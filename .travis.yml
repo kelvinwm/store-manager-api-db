@@ -7,6 +7,6 @@ install:
 before_script:
   - export SECRET_KEY="NOCSNDOCNnocnsodi"
 script:
-- pytest --cov=app -v -W error::UserWarning
+- nosetests --exe --with-coverage --cover-package=app
 after_success:
 - coveralls
