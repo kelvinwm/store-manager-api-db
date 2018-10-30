@@ -10,7 +10,7 @@ install:
 
 # Run tests
 script:
-  -nosetests --exe --with-coverage --cover-package=app
+  - nosetests --exe --with-coverage --cover-package=app
 
 after_success:
  - coveralls
