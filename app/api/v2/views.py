@@ -38,6 +38,10 @@ class Product(Resource):
 
 
 class Sales(Resource):
+    def get(self):
+        """Get all sales"""
+        return sales.get_all_sales()
+
     def post(self):
         """create a new sale"""
         return sales.add_sale()
