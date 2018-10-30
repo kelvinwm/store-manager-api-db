@@ -1,12 +1,16 @@
 language: python
 python:
-- "3.6"
-cache: pip
+  - "3.6"
+
+# command to install dependencies
 install:
-- pip install -r requirements.txt
+ - pip install -r requirements.txt
+ - pip install coverage codev
+ - pip install nose
 before_script:
-  - export SECRET_KEY="NOCSNDOCNnocnsodi"
+#  - export SECRET_KEY="NOCSNDOCNnocnsodi"
+# Run tests
 script:
 - nosetests --exe --with-coverage --cover-package=app
 after_success:
-- coveralls
+ - coveralls
