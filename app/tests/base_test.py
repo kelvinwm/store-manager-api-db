@@ -12,6 +12,8 @@ class BaseTest(unittest.TestCase):
         self.app.testing = True
         self.sign_up_data = {"first_name": "BEN10", "last_name": "THE4TH", "email": "ben100@storemanager.com",
                              "password": "25s#sssA4"}
+        self.sign_up_data = {"first_name": "BEN10", "last_name": "THE4TH", "email": "ben100@storemanager.com",
+                             "password": "25s#sssA4"}
         self.login_data = {"email": "peterkelvin@storemanager.com", "password": "25s#sssA4"}
         self.invalid_sign_up_data = {"first_name": "BEN10", "last_name": "THE4TH", "email": "ben10storemanager.com",
                                      "password": "25s#sssA4"}
@@ -19,7 +21,7 @@ class BaseTest(unittest.TestCase):
         self.invalid_login_data = {"username": "kevo", "email": "prince@gmail.com", "password": "12ds9vs33"}
         self.result = self.app.post('/api/v2/auth/login', data=json.dumps(self.login_data),
                                     content_type='application/json')
-        self.token = json.loads(self.result.data.decode('utf-8'))["Token"]
+        self.token = json.loads(self.result.data.decode('utf-8'))
         self.headers = {'content-type': 'application/json', 'access-token': self.token}
         self.category = {"category": "KLB"}
         self.category_update = {"category": "CHEM"}
