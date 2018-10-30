@@ -10,7 +10,8 @@ install:
 
 # Run tests
 script:
-   - pytest --cov=app
+#   - pytest --cov=app
+nosetests --exe --with-coverage --cover-package=app
 
 after_success:
  - coveralls
