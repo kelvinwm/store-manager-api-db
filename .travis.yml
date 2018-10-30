@@ -4,9 +4,9 @@ python:
 install:
   - pip install -r requirements.txt
 env:
-  - DB = postgres USER = postgres PASSWORD = 'python'
+  - DB = postgres USER = postgres PASSWORD = '123'
 before_script:
-  - psql -c "CREATE DATABASE test;" -U postgres
+  - psql -c "CREATE DATABASE store;" -U postgres
   - export ENV='testing'
 script:
   - pytest -v --cov=app/api
