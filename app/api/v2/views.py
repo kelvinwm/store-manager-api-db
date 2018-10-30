@@ -56,6 +56,10 @@ class Sale(Resource):
         """Update a sale record"""
         return sales.update_sale(sale_id)
 
+    def delete(self, sale_id):
+        """delete a sale record"""
+        return sales.delete_sale(sale_id)
+
 
 class UserLogin(Resource):
     """A user can Login"""
