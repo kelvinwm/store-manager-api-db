@@ -1,12 +1,12 @@
 language: 'python'
 python:
-  - '3.5.2'
+  - '3.7.0'
 install:
-  - pip install -r requirements.txt
+ - pip install -r requirements.txt
 before_script:
  - export DB_NAME="store"
  - psql -c 'create database store;' -U postgres
-- export SECRET_KEY="NOCSNDOCNnocnsodi"
+ - export SECRET_KEY="NOCSNDOCNnocnsodi"
 env:
  - DATABASE_URL="dbname='store' user='postgres' host='localhost' port=5432 password='123'"
 script:
