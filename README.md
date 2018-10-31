@@ -52,6 +52,7 @@ Endpoint | Functionality
 ------------ | -------------
 POST   /api/v2/auth/signup | Register a user
 POST   /api/v2/auth/login | Log in user
+POST   /api/v2/auth/logout | Log out user
 POST  /api/v2/products | Add a product
 POST  /api/v2/sales  | Add a sale record
 GET  /api/v2/products | Get all products
