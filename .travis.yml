@@ -6,7 +6,7 @@ install:
 before_script:
  - export DB_NAME="store"
  - psql -c 'create database store;' -U postgres
-
+- export SECRET_KEY="NOCSNDOCNnocnsodi"
 script:
   - pytest -v --cov=app/api
   - coveralls

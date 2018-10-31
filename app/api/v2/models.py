@@ -82,13 +82,14 @@ class Products:
         try:
             insert_query = """INSERT INTO products (product_name, category, quantity, price, date_created) VALUES (%s,
             %s,%s,%s,%s)"""
-            cur.execute("SELECT * FROM products WHERE product_name= '{0}'".format(data["product_name"]))
+            cur.execute("SELECT * FROM products WHERE product_name= '{0}'".format(data["product_name"].lower()))
             if cur.fetchone():
                 return jsonify({"Message": "Product already exists"})
             cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"]))
             if not cur.fetchone():
                 return jsonify({"Message": "Invalid category"})
-            cur.execute(insert_query, (data["product_name"], data["category"], data["quantity"], data["price"], now))
+            cur.execute(insert_query, (data["product_name"].lower(), data["category"].lower(), data["quantity"].lower(),
+                                       data["price"].lower(), now))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
