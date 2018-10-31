@@ -1,8 +1,8 @@
 language: 'python'
 python:
-  - '3.7.0'
+  - '3.5.2'
 install:
- - pip install -r requirements.txt
+  - pip install -r requirements.txt
 before_script:
  - export DB_NAME="store"
  - psql -c 'create database store;' -U postgres
