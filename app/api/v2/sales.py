@@ -47,37 +47,38 @@ class SalesModel:
     @login_required
     def add_sale(self, current_user, token):
         """add a product"""
-        if Validate().validate_sale() != "true":
-            return Validate().validate_sale()
-        global price, product_id, quantity, product_name
         data = request.get_json()
+        products = data["products"]
+        if not products:
+            return {"Alert": "Add products"}
+        if Validate().validate_sale(products) != "ok":
+            return Validate().validate_sale(products)
+        global price, product_id, quantity
+        sold_list = []
         try:
-            query = "SELECT * FROM products WHERE product_name ='{0}'".format(data["product_name"])
-            cur.execute(query)
-            rows = cur.fetchall()
-            if not rows:
-                return "product does not exist"
-            for row in rows:
-                product_id = row[0]
-                product_name = row[1]
-                quantity = int(row[3])
-                price = int(row[4])
-            if int(data["quantity"]) > quantity:
-                return {"Message": "Product out of stock", "Remaining " + product_name: quantity}
+            for product in products:
+                query = "SELECT * FROM products WHERE product_name ='{0}'".format(product["product_name"])
+                cur.execute(query)
+                rows = cur.fetchall()
+                for row in rows:
+                    product_id = row[0]
+                    quantity = int(row[3])
+                    price = int(row[4])
 
-            new_quantity = quantity - int(data["quantity"])
-            sql = """ UPDATE products SET quantity=%s WHERE id = %s"""
-            cur.execute(sql, (new_quantity, product_id))
-            conn.commit()
+                new_quantity = quantity - int(product["quantity"])
+                sql = """ UPDATE products SET quantity=%s WHERE id = %s"""
+                cur.execute(sql, (new_quantity, product_id))
+                conn.commit()
 
-            total_price = price * int(data["quantity"])
-            insert_query = """INSERT INTO sales (username,product_id,quantity, price, date_created) VALUES (
-                %s,%s,%s,%s,%s)"""
-            cur.execute(insert_query, (current_user['username'], product_id, data["quantity"], total_price, now))
-            conn.commit()
+                total_price = price * int(product["quantity"])
+                insert_query = """INSERT INTO sales (username,product_id,quantity, price, date_created) VALUES (
+                    %s,%s,%s,%s,%s)"""
+                cur.execute(insert_query, (current_user['username'], product_id, product["quantity"], total_price, now))
+                conn.commit()
+                sold_list.append(product["product_name"] + " " + str(new_quantity))
             return make_response(jsonify({
-                "Message": "Sale created successfully",
-                product_name + " remaining": new_quantity
+                "Message": "Sales created successfully",
+                "Remaining": sold_list
             }), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
@@ -120,7 +121,7 @@ class SalesModel:
         """modify products"""
         data = request.get_json()
         try:
-            sql = """ UPDATE sales SET product_id = %s, quantity=%s, price=%s WHERE id = %s"""
+            sql = """ UPDATE sales SET quantity=%s, price=%s WHERE id = %s"""
             query = "SELECT * FROM sales WHERE id ='{0}'".format(sale_id)
             cur.execute(query)
             rows = cur.fetchall()
@@ -128,7 +129,7 @@ class SalesModel:
                 return make_response(jsonify({
                     "Message": "Product not found"
                 }), 200)
-            cur.execute(sql, (data["product_name"], data["quantity"], data["price"], sale_id))
+            cur.execute(sql, (data["quantity"], data["price"], sale_id))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",

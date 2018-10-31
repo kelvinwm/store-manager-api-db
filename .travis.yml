@@ -7,7 +7,6 @@ env:
   - DB = postgres USER = postgres PASSWORD = '123'
 before_script:
   - psql -c "CREATE DATABASE store;" -U postgres
-  - export SECRET_KEY="NOCSNDOCNnocnsodi"
 
 script:
   - pytest -v --cov=app/api

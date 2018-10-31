@@ -1,5 +1,6 @@
 import json
 import unittest
+from db_init import drop_tables
 
 from app import create_app
 
@@ -29,9 +30,13 @@ class BaseTest(unittest.TestCase):
         self.product_not_found = {"product_name": "Revision", "category": "Longhorn", "quantity": 100, "price": 1500}
         self.product_err_data = {"product_name": "Revision English", "category": "Good book", "quantity": 100,
                                  "price": "dkls"}
+        self.add_sale = {"products": [{"product_name": "Jesma2", "quantity": "100"}]}
+        self.sale_excess_data = {"products": [{"product_name": "Jesma2", "quantity": "1000"}]}
+        self.sale_err_data = {"products": [{"product_name": "Mathsets4", "quantity": "12"}]}
 
 
 def teardown(self):
+    drop_tables()
     self.sign_up_data = None
     self.login_data = None
     self.invalid_sign_up_data = None

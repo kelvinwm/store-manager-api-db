@@ -73,15 +73,25 @@ class Validate:
             }))
         return "true"
 
-    def validate_sale(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument("product_name", required=True,
-                            help="Invalid entry", location=['json'])
-        parser.add_argument("quantity", required=True, type=int,
-                            help="Invalid entry", location=['json'])
-        args = parser.parse_args()
-        if args["quantity"] < 0:
-            return make_response(jsonify({
-                "Message": "Quantity cannot be a negative number"
-            }), 200)
-        return "true"
+    def validate_sale(self, products):
+
+        global quantity, product_name
+        for product in products:
+            if not product["quantity"] or not product["product_name"]:
+                return {"Error": "Empty entry"}
+            if int(product["quantity"]) < 0:
+                return {"Error": "Quantity cannot be a negative number"}
+            query = "SELECT * FROM products WHERE product_name ='{0}'".format(product["product_name"])
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return {"Error": "Product " + product["product_name"] + " does not exist",
+                        "Message": "Add this product"}
+            for row in rows:
+                product_name = row[1]
+                quantity = int(row[3])
+            if int(product["quantity"]) > quantity:
+                return {"Message": product["product_name"] + " out of stock",
+                        "Remaining " + product_name: quantity,
+                        "Hint": "restock"}
+        return "ok"

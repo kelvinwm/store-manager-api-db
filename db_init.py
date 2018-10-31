@@ -1,6 +1,7 @@
 import psycopg2
 import os
 
+
 # db_url = os.getenv(url)
 
 def connection():
@@ -64,15 +65,20 @@ def tables():
     return table_list
 
 
-db1 = """DROP TABLE IF EXISTS products CASCADE"""
-delete = """DELETE """
+def tables_to_drop():
+    db1 = """DROP TABLE IF EXISTS products CASCADE"""
+    db2 = """DROP TABLE IF EXISTS sales CASCADE"""
+    table_list = [db1, db2]
+    return table_list
 
 
 def drop_tables():
     conn = connection()
     cur = conn.cursor()
-    cur.execute(db1)
-    conn.commit()
+    drop_table = tables_to_drop()
+    for table in drop_table:
+        cur.execute(table)
+        conn.commit()
 
 
 def delete_record(name):
