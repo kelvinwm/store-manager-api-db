@@ -3,10 +3,9 @@ python:
   - '3.5.2'
 install:
   - pip install -r requirements.txt
-env:
-  - DB = postgres USER = postgres PASSWORD = '123'
 before_script:
-  - psql -c "CREATE DATABASE store;" -U postgres
+ - export DB_NAME="store"
+ - psql -c 'create database store;' -U postgres
 
 script:
   - pytest -v --cov=app/api
