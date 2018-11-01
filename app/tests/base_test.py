@@ -18,11 +18,10 @@ class BaseTest(unittest.TestCase):
                                      "password": "25s#sssA4"}
         self.empty_login_data = {"email": "", "password": ""}
         self.invalid_login_data = {"username": "kevo", "email": "prince@gmail.com", "password": "12ds9vs33"}
-        self.result = self.app.post('/api/v2/auth/login', data=json.dumps({"email": "peterkelvin@storemanager.com",
-                                                                           "password": "25s#sssA4"}),
+        self.result = self.app.post('/api/v2/auth/login', data=json.dumps(self.login_data),
                                     content_type='application/json')
-        self.token_data = json.loads(self.result.data.decode('utf-8'))
-        self.token = self.token_data["Token"]
+        print(self.result)
+        self.token = json.loads(self.result.data.decode('utf-8'))
         self.headers = {'content-type': 'application/json', 'access-token': self.token}
         self.category = {"category": "klb"}
         self.category_update = {"category": "klb"}
