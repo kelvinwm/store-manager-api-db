@@ -65,8 +65,8 @@
       <file leaf-file-name="base_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/tests/base_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="22" column="202" selection-start-line="22" selection-start-column="202" selection-end-line="22" selection-end-column="202" />
+            <state relative-caret-position="82">
+              <caret line="23" column="104" selection-start-line="23" selection-start-column="104" selection-end-line="23" selection-end-column="104" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -89,8 +89,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3066">
-              <caret line="190" column="79" selection-start-line="190" selection-start-column="79" selection-end-line="190" selection-end-column="79" />
+            <state relative-caret-position="48">
+              <caret line="194" column="58" lean-forward="true" selection-start-line="194" selection-start-column="58" selection-end-line="194" selection-end-column="58" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -101,8 +101,8 @@
       <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+            <state relative-caret-position="425">
+              <caret line="25" column="13" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -185,7 +185,6 @@
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/app/api/v2/views.py" />
         <option value="$PROJECT_DIR$/app/api/v2/sales.py" />
-        <option value="$PROJECT_DIR$/app/api/v2/models.py" />
         <option value="$PROJECT_DIR$/app/tests/test_category.py" />
         <option value="$PROJECT_DIR$/app/tests/test_product.py" />
         <option value="$PROJECT_DIR$/app/api/v2/utils.py" />
@@ -193,6 +192,7 @@
         <option value="$PROJECT_DIR$/db_init.py" />
         <option value="$PROJECT_DIR$/app/tests/test_users_auth.py" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/app/api/v2/models.py" />
         <option value="$PROJECT_DIR$/app/tests/base_test.py" />
       </list>
     </option>
@@ -284,6 +284,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18080357" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -292,7 +293,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.68151814" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.68151814" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -641,16 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3066">
-          <caret line="190" column="79" selection-start-line="190" selection-start-column="79" selection-end-line="190" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db_init.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -673,15 +664,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+        <state relative-caret-position="425">
+          <caret line="25" column="13" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="194" column="58" lean-forward="true" selection-start-line="194" selection-start-column="58" selection-end-line="194" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/tests/base_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="22" column="202" selection-start-line="22" selection-start-column="202" selection-end-line="22" selection-end-column="202" />
+        <state relative-caret-position="82">
+          <caret line="23" column="104" selection-start-line="23" selection-start-column="104" selection-end-line="23" selection-end-column="104" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

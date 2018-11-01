@@ -20,8 +20,7 @@ class BaseTest(unittest.TestCase):
         self.invalid_login_data = {"username": "kevo", "email": "prince@gmail.com", "password": "12ds9vs33"}
         self.result = self.app.post('/api/v2/auth/login', data=json.dumps(self.login_data),
                                     content_type='application/json')
-        self.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidHJ1ZSIsInVzZXJuYW1lIjoicGV0ZXJrZWx2aW5Ac3Rv" \
-                     "cmVtYW5hZ2VyLmNvbSIsImV4cCI6MTU0MTQ4NzY4Mn0.go8n8jN_K7FIHFiaBlJnhD2eSSxMzHeqpbpXOg8x2K0"
+        self.token = json.loads(self.result.data.decode('utf-8'))["Token"]
         self.headers = {'content-type': 'application/json', 'access-token': self.token}
         self.category = {"category": "klb"}
         self.category_update = {"category": "klb"}
