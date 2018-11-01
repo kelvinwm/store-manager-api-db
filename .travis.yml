@@ -14,7 +14,8 @@ services:
 before_script:
   - psql -c 'create database store;' -U postgres
 env:
-  - DATABASE_URL="dbname='store' user='postgres' host='localhost' port=5432 password=''"
+  - DATABASE_URL="database='store', user='postgres', password='123', host='127.0.0.1', port='5432'"
+
 
 # Run tests
 script:

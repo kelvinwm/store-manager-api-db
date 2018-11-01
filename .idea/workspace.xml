@@ -4,7 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/app/api/v2/models.py" line="405" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="" />
+    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,8 +67,8 @@
       <file leaf-file-name="db_init.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db_init.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1411">
-              <caret line="84" column="64" selection-start-line="84" selection-start-column="64" selection-end-line="84" selection-end-column="64" />
+            <state relative-caret-position="119">
+              <caret line="7" column="108" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="108" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -74,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="191" column="111" selection-start-line="190" selection-start-column="43" selection-end-line="191" selection-end-column="111" />
+            <state relative-caret-position="3066">
+              <caret line="190" column="79" lean-forward="true" selection-start-line="190" selection-start-column="79" selection-end-line="190" selection-end-column="79" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -86,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="272">
+              <caret line="16" column="98" selection-start-line="16" selection-start-column="98" selection-end-line="16" selection-end-column="98" />
             </state>
           </provider>
         </entry>
@@ -610,16 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db_init.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="84" column="64" selection-start-line="84" selection-start-column="64" selection-end-line="84" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/tests/test_users_auth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -657,20 +649,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="191" column="111" selection-start-line="190" selection-start-column="43" selection-end-line="191" selection-end-column="111" />
+        <state relative-caret-position="3066">
+          <caret line="190" column="79" lean-forward="true" selection-start-line="190" selection-start-column="79" selection-end-line="190" selection-end-column="79" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="108" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="98" selection-start-line="16" selection-start-column="98" selection-end-line="16" selection-end-column="98" />
         </state>
       </provider>
     </entry>
