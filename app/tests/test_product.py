@@ -1,5 +1,5 @@
 import json
-from app.tests.base_test import BaseTest
+from app.tests.test import BaseTest
 from db_init import drop_tables, create_tables
 
 
@@ -39,7 +39,7 @@ class TestProducts(BaseTest):
         self.assertEqual(result.status_code, 200)
         res = self.app.put('/api/v2/products/21', data=json.dumps(self.product_not_found), headers=self.headers)
         result = json.loads(res.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Item does not exist')
+        self.assertEqual(result["Message"], 'Product not found')
 
     def test_product_list_deletion(self):
         """TEST API can delete existing product list item"""
