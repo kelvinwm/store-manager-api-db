@@ -190,7 +190,7 @@ class Users:
                 for role in cur.fetchall():
                     new_token = jwt.encode({"role": role[0], "username": data["email"],
                                             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=7200)},
-                                           app.config["SECRET_KEY"])
+                                           "NOCSNDOCNnocnsodi")
                     return jsonify({"Token": new_token.decode('UTF-8')})
         return jsonify({"Message": "Invalid credentials"})
 
