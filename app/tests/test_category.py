@@ -1,6 +1,6 @@
 import json
 from app.tests.base_test import BaseTest
-from db_init import delete_category
+from db_init import delete_category, create_tables
 
 
 class TestCategories(BaseTest):
@@ -12,7 +12,8 @@ class TestCategories(BaseTest):
 
     def test_add_category(self):
         """TEST API can add category to database properly"""
-        delete_category(self.category["category"])
+        delete_category()
+        create_tables()
         response = self.app.post('/api/v2/category', data=json.dumps(self.category), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
         self.assertEqual(result["Message"], "category added successfully")
@@ -20,7 +21,7 @@ class TestCategories(BaseTest):
 
     def test_category_list_can_be_edited(self):
         """TEST API can edit existing category list"""
-        response = self.app.put('/api/v2/category/21', data=json.dumps(self.category_update), headers=self.headers)
+        response = self.app.put('/api/v2/category/1', data=json.dumps({"category": "klb"}), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
         self.assertEqual(result["Message"], 'Updated successfully')
         self.assertEqual(response.status_code, 200)

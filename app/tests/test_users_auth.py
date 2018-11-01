@@ -10,9 +10,10 @@ class TestUsersAuth(BaseTest):
 
     def test_valid_signup(self):
         """TEST API can sign up users correctly"""
-        delete_record(self.sign_up_data["first_name"])
+        delete_record(self.sign_up_data["email"])
         response = self.app.post('/api/v2/auth/signup', data=json.dumps(self.sign_up_data), headers=self.headers)
-        self.assertEqual(response.status_code, 201)
+        result = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(result["Message"], "User successfully registered")
 
     def test_valid_login(self):
         """TEST API can sign up users correctly"""

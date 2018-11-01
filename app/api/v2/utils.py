@@ -10,9 +10,10 @@ cur = conn.cursor()
 
 
 class Validate:
-    def validate_product(self, current_user):
+    def validate_product(self, current_user, action):
         parser = reqparse.RequestParser()
-        parser.add_argument("product_name", required=True, help="Invalid entry", location=['json'])
+        parser.add_argument("product_name", required=True, type=str, help={"Message": "Invalid entry"},
+                            location=['json'])
         parser.add_argument("price", required=True, type=int,
                             help="Invalid entry", location=['json'])
         parser.add_argument("category", required=True, help="Invalid entry", location=['json'])
@@ -21,10 +22,13 @@ class Validate:
         args = parser.parse_args()
         if current_user != "true":
             return make_response(jsonify({
+                "Error": "You not allowed to " + action,
                 "Message": "Permission denied.Contact Admin"
             }))
-        if not args['category'] or not args['product_name']:
-            return jsonify({"Message": "Invalid entry"})
+        if not args['category']:
+            return jsonify({"category": "Invalid entry"})
+        if not args['product_name']:
+            return jsonify({"product name": "Invalid entry"})
         if args["price"] < 0:
             return make_response(jsonify({
                 "Message": "price cannot be a negative number"
@@ -33,14 +37,15 @@ class Validate:
             return make_response(jsonify({
                 "Message": "Quantity cannot be a negative number"
             }), 200)
-        cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(args["category"]))
+        cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(args["category"].lower()))
         if not cur.fetchone():
             return jsonify({"Message": "Invalid category"})
         return "true"
 
-    def validate_user(self, current_user):
+    def validate_user(self, current_user, action):
         if current_user != "true":
             return make_response(jsonify({
+                "Alert": "You are not allowed to " + action,
                 "Message": "Permission denied.Contact Admin"
             }))
         data = request.get_json()
@@ -51,14 +56,16 @@ class Validate:
             return jsonify({"Message": "Invalid email"})
         return "true"
 
-    def admin_checker(self, current_user):
+    def admin_checker(self, current_user, action):
         if current_user != "true":
             return make_response(jsonify({
+                "Denied": "You are not allowed to " + action,
                 "Message": "Permission denied.Contact Admin"
             }))
         return "true"
 
     def find_product(self, product_id):
+        data = request.get_json()
         try:
             query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
             cur.execute(query)
@@ -71,6 +78,7 @@ class Validate:
             return make_response(jsonify({
                 "Message": "error finding item"
             }))
+
         return "true"
 
     def validate_sale(self, products):
@@ -81,7 +89,7 @@ class Validate:
                 return {"Error": "Empty entry"}
             if int(product["quantity"]) < 0:
                 return {"Error": "Quantity cannot be a negative number"}
-            query = "SELECT * FROM products WHERE product_name ='{0}'".format(product["product_name"])
+            query = "SELECT * FROM products WHERE product_name ='{0}'".format(product["product_name"].lower())
             cur.execute(query)
             rows = cur.fetchall()
             if not rows:
@@ -92,6 +100,5 @@ class Validate:
                 quantity = int(row[3])
             if int(product["quantity"]) > quantity:
                 return {"Message": product["product_name"] + " out of stock",
-                        "Remaining " + product_name: quantity,
-                        "Hint": "restock"}
+                        "Remaining " + product_name: quantity, "Hint": "restock"}
         return "ok"

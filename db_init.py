@@ -81,16 +81,16 @@ def drop_tables():
         conn.commit()
 
 
-def delete_record(name):
-    query = "DELETE FROM users WHERE first_name = '{0}'".format(name)
+def delete_record(email):
+    query = "DELETE FROM users WHERE email = '{0}'".format(email)
     conn = connection()
     cur = conn.cursor()
     cur.execute(query)
     conn.commit()
 
 
-def delete_category(category):
-    query = "DELETE FROM categories WHERE category = '{0}'".format(category)
+def delete_category():
+    query = "DROP TABLE IF EXISTS categories CASCADE"
     conn = connection()
     cur = conn.cursor()
     cur.execute(query)

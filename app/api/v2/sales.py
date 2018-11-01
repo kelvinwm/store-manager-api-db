@@ -53,7 +53,8 @@ class SalesModel:
             return {"Alert": "Add products"}
         if Validate().validate_sale(products) != "ok":
             return Validate().validate_sale(products)
-        global price, product_id, quantity
+        global price, product_id, quantity, total_price
+        total_cost = 0
         sold_list = []
         try:
             for product in products:
@@ -75,10 +76,12 @@ class SalesModel:
                     %s,%s,%s,%s,%s)"""
                 cur.execute(insert_query, (current_user['username'], product_id, product["quantity"], total_price, now))
                 conn.commit()
-                sold_list.append(product["product_name"] + " " + str(new_quantity))
+                sold_list.append(product["product_name"] + " remaining " + str(new_quantity))
+                total_cost += total_price
             return make_response(jsonify({
                 "Message": "Sales created successfully",
-                "Remaining": sold_list
+                "Remaining": sold_list,
+                "Total cost": str(total_cost)
             }), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({

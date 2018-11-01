@@ -76,8 +76,8 @@ class Products:
     @login_required
     def add_product(self, current_user, token):
         """add a product"""
-        if Validate().validate_product(current_user['role']) != "true":
-            return Validate().validate_product(current_user['role'])
+        if Validate().validate_product(current_user['role'], "Add product") != "true":
+            return Validate().validate_product(current_user['role'], "Add product")
         data = request.get_json()
         try:
             insert_query = """INSERT INTO products (product_name, category, quantity, price, date_created) VALUES (%s,
@@ -85,7 +85,7 @@ class Products:
             cur.execute("SELECT * FROM products WHERE product_name= '{0}'".format(data["product_name"].lower()))
             if cur.fetchone():
                 return jsonify({"Message": "Product already exists"})
-            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"]))
+            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"].lower()))
             if not cur.fetchone():
                 return jsonify({"Message": "Invalid category"})
             cur.execute(insert_query, (data["product_name"].lower(), data["category"].lower(), data["quantity"].lower(),
@@ -136,14 +136,15 @@ class Products:
     @login_required
     def update_product(self, product_id, current_user, token):
         """modify products"""
-        if Validate().validate_product(current_user['role']) != "true":
-            return Validate().validate_product(current_user['role'])
+        if Validate().validate_product(current_user['role'], "Update product") != "true":
+            return Validate().validate_product(current_user['role'], "Update product")
         data = request.get_json()
         try:
             sql = """ UPDATE products SET product_name = %s ,category=%s, quantity=%s, price=%s WHERE id = %s"""
             if Validate().find_product(product_id) != "true":
                 return Validate().find_product(product_id)
-            cur.execute(sql, (data["product_name"], data["category"], data["quantity"], data["price"], product_id))
+            cur.execute(sql, (data["product_name"].lower(), data["category"].lower(), data["quantity"].lower(),
+                              data["price"].lower(), product_id))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
@@ -155,8 +156,8 @@ class Products:
     @login_required
     def delete_product(self, product_id, current_user, token):
         """delete a product"""
-        if Validate().admin_checker(current_user['role']) != "true":
-            return Validate().admin_checker(current_user['role'])
+        if Validate().admin_checker(current_user['role'], "delete product") != "true":
+            return Validate().admin_checker(current_user['role'], "delete product")
         try:
             if Validate().find_product(product_id) != "true":
                 return Validate().find_product(product_id)
@@ -196,8 +197,8 @@ class Users:
     @login_required
     def add_user(self, current_user, token):
         """A user can signup"""
-        if Validate().validate_user(current_user['role']) != "true":
-            return Validate().validate_user(current_user['role'])
+        if Validate().validate_user(current_user['role'], "sign up users") != "true":
+            return Validate().validate_user(current_user['role'], "sign up users")
         data = request.get_json()
         if not re.match('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$])', data["password"]):
             return jsonify({"Message": "password should include a digit, Uppercase, lowercase and a special character"})
@@ -206,12 +207,13 @@ class Users:
         pws = data["password"]
         password = generate_password_hash(pws, method="sha256")
         try:
-            cur.execute("SELECT * FROM users WHERE email= '{0}'".format(data["email"]))
+            cur.execute("SELECT * FROM users WHERE email= '{0}'".format(data["email"].lower()))
             if cur.fetchone():
                 return jsonify({"Message": "User already registered"})
             insert_query = """INSERT INTO users (first_name, last_name, email, role, password, date_created) VALUES
                          (%s,%s, %s,%s,%s,%s)"""
-            cur.execute(insert_query, (data["first_name"], data["last_name"], data["email"], False, password, now))
+            cur.execute(insert_query, (data["first_name"].lower(), data["last_name"].lower(), data["email"].lower(),
+                                       False, password, now))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
@@ -239,8 +241,8 @@ class Users:
     @login_required
     def get_all_users(self, current_user, token):
         """A user can get all users"""
-        if Validate().admin_checker(current_user['role']) != "true":
-            return Validate().admin_checker(current_user['role'])
+        if Validate().admin_checker(current_user['role'], "view users") != "true":
+            return Validate().admin_checker(current_user['role'], "view users")
         users = []
         try:
             cur.execute("SELECT id, first_name, last_name, email, role, date_created from users")
@@ -302,8 +304,8 @@ class Users:
     @login_required
     def update_user(self, user_id, current_user, token):
         """give admin right to a specific store attendant"""
-        if Validate().validate_user(current_user['role']) != "true":
-            return Validate().validate_user(current_user['role'])
+        if Validate().validate_user(current_user['role'], "update user data") != "true":
+            return Validate().validate_user(current_user['role'], "update user data")
         data = request.get_json()
         if not data["role"]:
             return make_response(jsonify({"message": "Please enter all credentials"}))
@@ -316,7 +318,8 @@ class Users:
                     "Message": "User not found"
                 }), 200)
             sql = """ UPDATE users SET first_name = %s ,last_name=%s, email=%s, role=%s WHERE id = %s"""
-            cur.execute(sql, (data["first_name"], data["last_name"], data["email"], data["role"], user_id))
+            cur.execute(sql, (data["first_name"].lower(), data["last_name"].lower(), data["email"].lower(),
+                              data["role"].lower(), user_id))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
@@ -359,15 +362,17 @@ class Categories:
     @login_required
     def add_category(self, current_user, token):
         """Create Category"""
+        if Validate().admin_checker(current_user['role'], "create a category") != "true":
+            return Validate().admin_checker(current_user['role'], "create a category")
         data = request.get_json()
         if not data or not data["category"]:
             return jsonify({"Message": "Invalid entry"})
         try:
             insert_query = """INSERT INTO categories (category, date_created) VALUES (%s,%s)"""
-            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"]))
+            cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"].lower()))
             if cur.fetchone():
                 return jsonify({"Message": "category already exists"})
-            cur.execute(insert_query, (data["category"], now))
+            cur.execute(insert_query, (data["category"].lower(), now))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
@@ -381,11 +386,11 @@ class Categories:
     @login_required
     def update_category(self, category_id, current_user, token):
         """Modify category"""
-        if Validate().admin_checker(current_user['role']) != "true":
-            return Validate().admin_checker(current_user['role'])
+        if Validate().admin_checker(current_user['role'], "update category") != "true":
+            return Validate().admin_checker(current_user['role'], "update category")
         data = request.get_json()
         if not data['category']:
-            return jsonify({"Message": "Invalid entry"})
+            return jsonify({"Category": "Invalid entry"})
         try:
             query = "SELECT * FROM categories WHERE id ='{0}'".format(category_id)
             cur.execute(query)
@@ -395,7 +400,7 @@ class Categories:
                     "Message": "Category not found"
                 }), 200)
             sql = """ UPDATE categories SET category = %s WHERE id = %s"""
-            cur.execute(sql, (data["category"], category_id))
+            cur.execute(sql, (data["category"].lower(), category_id))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
@@ -407,8 +412,8 @@ class Categories:
     @login_required
     def delete_category(self, category_id, current_user, token):
         """Delete category"""
-        if Validate().admin_checker(current_user['role']) != "true":
-            return Validate().admin_checker(current_user['role'])
+        if Validate().admin_checker(current_user['role'], "delete category") != "true":
+            return Validate().admin_checker(current_user['role'], "delete category")
         try:
             cur.execute("SELECT * FROM categories WHERE id= '{0}'".format(category_id))
             if not cur.fetchone():

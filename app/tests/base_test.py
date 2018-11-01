@@ -11,9 +11,7 @@ class BaseTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app().test_client()
         self.app.testing = True
-        self.sign_up_data = {"first_name": "BEN10", "last_name": "THE4TH", "email": "ben100@storemanager.com",
-                             "password": "25s#sssA4"}
-        self.sign_up_data = {"first_name": "BEN10", "last_name": "THE4TH", "email": "ben100@storemanager.com",
+        self.sign_up_data = {"first_name": "KLEVIN", "last_name": "WMUINDE", "email": "kevmwk@gmail.com",
                              "password": "25s#sssA4"}
         self.login_data = {"email": "peterkelvin@storemanager.com", "password": "25s#sssA4"}
         self.invalid_sign_up_data = {"first_name": "BEN10", "last_name": "THE4TH", "email": "ben10storemanager.com",
@@ -24,14 +22,14 @@ class BaseTest(unittest.TestCase):
                                     content_type='application/json')
         self.token = json.loads(self.result.data.decode('utf-8'))["Token"]
         self.headers = {'content-type': 'application/json', 'access-token': self.token}
-        self.category = {"category": "KLB"}
-        self.category_update = {"category": "CHEM"}
-        self.add_product = {"product_name": "Jesma2", "category": "Longhorn", "quantity": 100, "price": 1500}
-        self.product_not_found = {"product_name": "Revision", "category": "Longhorn", "quantity": 100, "price": 1500}
+        self.category = {"category": "klb"}
+        self.category_update = {"category": "klb"}
+        self.add_product = {"category": "KLB", "price": "1500", "product_name": "Techno", "quantity": "100"}
+        self.product_not_found = {"product_name": "Revision", "category": "klb", "quantity": 100, "price": 1500}
         self.product_err_data = {"product_name": "Revision English", "category": "Good book", "quantity": 100,
                                  "price": "dkls"}
-        self.add_sale = {"products": [{"product_name": "Jesma2", "quantity": "100"}]}
-        self.sale_excess_data = {"products": [{"product_name": "Jesma2", "quantity": "1000"}]}
+        self.add_sale = {"products": [{"product_name": "techno", "quantity": "10"}]}
+        self.sale_excess_data = {"products": [{"product_name": "Techno", "quantity": "1000"}]}
         self.sale_err_data = {"products": [{"product_name": "Mathsets4", "quantity": "12"}]}
 
 
