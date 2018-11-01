@@ -12,7 +12,7 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'create database store_manager;' -U postgres
+  - psql -c 'create database store;' -U postgres
 env:
   - DATABASE_URL="dbname='store' user='postgres' host='localhost' port=5432 password=''"
 
