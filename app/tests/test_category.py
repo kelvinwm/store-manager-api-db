@@ -1,10 +1,14 @@
 import json
+
+from app import create_app
 from app.tests.base_test import BaseTest
 from db_init import delete_category, create_tables
 
 
 class TestCategories(BaseTest):
     def setUp(self):
+        self.app = create_app().test_client()
+        self.app.testing = True
         self.resul = self.app.post('/api/v2/auth/login',
                                     data=json.dumps({"email": "peterkelvin@storemanager.com", "password": "25s#sssA4"}),
                                     content_type='application/json')
