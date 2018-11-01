@@ -4,12 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/api/v2/models.py" line="405" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/api/v2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/base_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_category.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_users_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_users_auth.py" afterDir="false" />
-    </list>
+    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +30,10 @@
         <entry file="file://$PROJECT_DIR$/app/tests/test_product.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="14" column="23" selection-end-line="50" />
+              <caret line="14" column="21" selection-end-line="50" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,8 +41,11 @@
       <file leaf-file-name="test_sales.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/tests/test_sales.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="36" column="44" lean-forward="true" selection-end-line="54" />
+            <state relative-caret-position="269">
+              <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,8 +62,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base_test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/tests/base_test.py">
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/tests/test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
               <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
@@ -167,11 +168,11 @@
         <option value="$PROJECT_DIR$/app/tests/test_users_auth.py" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/db_init.py" />
-        <option value="$PROJECT_DIR$/app/tests/test_sales.py" />
-        <option value="$PROJECT_DIR$/app/tests/test_product.py" />
         <option value="$PROJECT_DIR$/app/tests/test_category.py" />
         <option value="$PROJECT_DIR$/app/tests/base_test.py" />
         <option value="$PROJECT_DIR$/app/api/v2/models.py" />
+        <option value="$PROJECT_DIR$/app/tests/test_product.py" />
+        <option value="$PROJECT_DIR$/app/tests/test_sales.py" />
       </list>
     </option>
   </component>
@@ -262,8 +263,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18080357" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18080357" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32838285" />
@@ -619,20 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/tests/test_product.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="14" column="23" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/tests/test_sales.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="36" column="44" lean-forward="true" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/tests/test_category.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -643,10 +631,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/tests/base_test.py">
+    <entry file="file://$PROJECT_DIR$/app/tests/test_product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="14" column="21" selection-end-line="50" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tests/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tests/test_sales.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
