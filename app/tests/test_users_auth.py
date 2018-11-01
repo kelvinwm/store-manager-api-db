@@ -1,7 +1,7 @@
 import unittest
 import json
 
-from app.tests.test_base import BaseTest
+from app.tests.test import BaseTest
 from db_init import delete_record
 
 

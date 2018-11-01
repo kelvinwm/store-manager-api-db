@@ -4,11 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/api/v2/models.py" line="405" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/tests/base_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_category.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_users_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_users_auth.py" afterDir="false" />
-    </list>
+    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +44,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_category.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_category.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/tests/test_category.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -84,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="30" column="79" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="30" selection-end-column="79" />
+            <state relative-caret-position="53">
+              <caret line="16" selection-start-line="16" selection-end-line="16" selection-end-column="24" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -261,6 +257,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18080357" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -269,7 +266,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.68151814" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.68151814" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -608,16 +605,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="30" column="79" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="30" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db_init.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -658,6 +645,16 @@
           <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="16" selection-start-line="16" selection-end-line="16" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
