@@ -136,15 +136,34 @@ class Products:
     @login_required
     def update_product(self, product_id, current_user, token):
         """modify products"""
-        if Validate().validate_product(current_user['role'], "Update product") != "true":
-            return Validate().validate_product(current_user['role'], "Update product")
+        global price, category, quantity
+        if Validate().admin_checker(current_user['role'], "Update product") != "true":
+            return Validate().admin_checker(current_user['role'], "Update product")
         data = request.get_json()
         try:
-            sql = """ UPDATE products SET product_name = %s ,category=%s, quantity=%s, price=%s WHERE id = %s"""
+            query = "SELECT * FROM products WHERE id ='{0}'".format(product_id)
+            cur.execute(query)
+            rows = cur.fetchall()
+            if not rows:
+                return make_response(jsonify({
+                    "Message": "Product not found"
+                }), 200)
+            for row in rows:
+                category = row[2]
+                quantity = int(row[3])
+                price = int(row[4])
+            if "product_name" in data:
+                return {"Error": "You cannot update product name"}
+            if "category" in data:
+                category = data["category"].lower()
+            if "quantity" in data:
+                quantity = data["quantity"]
+            if "price" in data:
+                price = data["price"]
+            sql = """ UPDATE products SET category=%s, quantity=%s, price=%s WHERE id = %s"""
             if Validate().find_product(product_id) != "true":
                 return Validate().find_product(product_id)
-            cur.execute(sql, (data["product_name"].lower(), data["category"].lower(), data["quantity"].lower(),
-                              data["price"].lower(), product_id))
+            cur.execute(sql, (category, quantity, price, product_id))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",
@@ -304,11 +323,10 @@ class Users:
     @login_required
     def update_user(self, user_id, current_user, token):
         """give admin right to a specific store attendant"""
-        if Validate().validate_user(current_user['role'], "update user data") != "true":
-            return Validate().validate_user(current_user['role'], "update user data")
+        global email, first_name, last_name, user_role
+        if Validate().admin_checker(current_user['role'], "update user data") != "true":
+            return Validate().admin_checker(current_user['role'], "update user data")
         data = request.get_json()
-        if not data["role"]:
-            return make_response(jsonify({"message": "Please enter all credentials"}))
         try:
             query = "SELECT * FROM users WHERE id ='{0}'".format(user_id)
             cur.execute(query)
@@ -317,9 +335,29 @@ class Users:
                 return make_response(jsonify({
                     "Message": "User not found"
                 }), 200)
+            for row in rows:
+                first_name = row[1]
+                last_name = row[2]
+                email = row[3]
+                user_role = row[4]
+            if "first_name" in data:
+                first_name = data["first_name"].lower()
+
+            if "last_name" in data:
+                last_name = data["last_name"].lower()
+
+            if "email" in data:
+                is_valid = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$',
+                                    data["email"])
+                if not is_valid:
+                    return jsonify({"Message": "Invalid email"})
+                email = data["email"].lower()
+
+            if "role" in data:
+                user_role = data["role"].lower()
+
             sql = """ UPDATE users SET first_name = %s ,last_name=%s, email=%s, role=%s WHERE id = %s"""
-            cur.execute(sql, (data["first_name"].lower(), data["last_name"].lower(), data["email"].lower(),
-                              data["role"].lower(), user_id))
+            cur.execute(sql, (first_name, last_name, email, user_role, user_id))
             conn.commit()
             return make_response(jsonify({
                 "status": "OK",

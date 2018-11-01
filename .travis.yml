@@ -13,8 +13,9 @@ services:
 
 before_script:
   - psql -c 'create database store;' -U postgres
+  - psql -c "ALTER USER postgres WITH PASSWORD '123';" -U postgres
 env:
-  - DATABASE_URL="database='store', user='postgres', password='', port='5432'"
+  - DATABASE_URL="database='store', user='postgres', password='123', port='5432'"
 
 
 # Run tests
