@@ -189,7 +189,7 @@ class Users:
                 cur.execute("SELECT role FROM users WHERE email= '{0}'".format(data["email"]))
                 for role in cur.fetchall():
                     new_token = jwt.encode({"role": role[0], "username": data["email"],
-                                            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)},
+                                            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=7200)},
                                            app.config["SECRET_KEY"])
                     return jsonify({"Token": new_token.decode('UTF-8')})
         return jsonify({"Message": "Invalid credentials"})
