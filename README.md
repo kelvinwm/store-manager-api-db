@@ -57,7 +57,6 @@ PUT /api/v2/users/id |	Update user role
 GET /api/v2/users	| get all registered users
 POST /api/v2/category	| Add a category
 GET /api/v2/category	| Get all categories
-GET /api/v2/category/id	| Get a category by id
 PUT /api/v2/category/id |	Update a category
 DELETE /api/v2/category/id | Delete a category
 POST /api/v2/products	| Add a product
