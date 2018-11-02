@@ -22,7 +22,7 @@ Instructions on how to run on your local machine for development and testing pur
 1. Clone the repository
 
 ```
-https://github.com/kelvinwm/store-manager-api
+https://github.com/kelvinwm/store-manager-api-db
 ```
 2. Initialize and activate a virtualenv
 
