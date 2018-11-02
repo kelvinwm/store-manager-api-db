@@ -63,7 +63,7 @@ GET  /api/v2/sales | Get all sale records
 GET  /api/v2/sales/id | Get a single sale record
 PUT  /api/v2/sales/id | Update a single sale record
 DELETE  /api/v2/sales/id | Delete a single sale record
-1. POST /api/v2/auth/signup |	Register a user
+1.POST /api/v2/auth/signup |	Register a user
 2. POST /api/v2/auth/login	| Log in user
 3. POST /api/v2/auth/logout	| Log out user
 4. PUT /api/v2/users/id |	Update user role
