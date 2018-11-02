@@ -9,7 +9,6 @@ class TestCategories(BaseTest):
         """TEST API can return all categories in the database"""
         response = self.app.get('/api/v2/category', headers=self.headers)
         self.assertEqual(response.status_code, 200)
-        print(self.headers)
 
     def test_add_category(self):
         """TEST API can add category to database properly"""
