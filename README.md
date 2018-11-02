@@ -22,7 +22,7 @@ Instructions on how to run on your local machine for development and testing pur
 1. Clone the repository
 
 ```
-https://github.com/kelvinwm/store-manager-api
+https://github.com/kelvinwm/store-manager-api-db
 ```
 2. Initialize and activate a virtualenv
 
@@ -50,18 +50,21 @@ Here is a list of all endpoints for store manager API
 
 Endpoint | Functionality 
 ------------ | -------------
-POST   /api/v2/auth/signup | Register a user
-POST   /api/v2/auth/login | Log in user
-POST   /api/v2/auth/logout | Log out user
-POST  /api/v2/products | Add a product
-POST  /api/v2/sales  | Add a sale record
-GET  /api/v2/products | Get all products
-GET  /api/v2/products/id  | Get a single product
-PUT  /api/v2/products/id | Update a single product
-DELETE  /api/v2/products/id | Delete a single product
-GET  /api/v2/sales | Get all sale records
-GET  /api/v2/sales/id | Get a single sale record
-PUT  /api/v2/sales/id | Update a single sale record
-DELETE  /api/v2/sales/id | Delete a single sale record
-
-
+1.POST /api/v2/auth/signup |	Register a user
+POST /api/v2/auth/login	| Log in user
+POST /api/v2/auth/logout	| Log out user
+PUT /api/v2/users/id |	Update user role
+GET /api/v2/users	| get all registered users
+POST /api/v2/category	| Add a category
+GET /api/v2/category	| Get all categories
+PUT /api/v2/category/id |	Update a category
+DELETE /api/v2/category/id | Delete a category
+POST /api/v2/products	| Add a product
+POST /api/v2/sales	| Add a sale record
+GET /api/v2/products	| Get all products
+GET /api/v2/products/id	| Get a single product
+PUT /api/v2/products/id	| Update a single product
+DELETE /api/v2/products/id	| Delete a single product
+GET /api/v2/sales	| Get all sale records
+GET /api/v2/sales/id	| Get a single sale record
+PUT /api/v2/sales/id	| Update a single sale record
