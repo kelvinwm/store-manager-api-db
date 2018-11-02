@@ -82,7 +82,6 @@ DELETE  /api/v2/sales/id | Delete a single sale record
 17. GET /api/v2/sales	| Get all sale records
 18. GET /api/v2/sales/id	| Get a single sale record
 19. PUT /api/v2/sales/id	| Update a single sale record
-20. DELETE /api/v2/sales/id	| Delete a single sale record
 
 
 
