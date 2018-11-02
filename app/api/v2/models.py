@@ -40,6 +40,7 @@ def login_required(func):
 
 class ProductsModel:
     """Product functions"""
+
     def __init__(self):
         self.conn = connection()
         self.cur = self.conn.cursor()
@@ -227,7 +228,7 @@ class Users:
                 self.cur.execute("SELECT role FROM users WHERE email= '{0}'".format(data["email"]))
                 for role in self.cur.fetchall():
                     new_token = jwt.encode({"role": role[0], "username": data["email"],
-                                            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=43800)},
+                                            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=87600)},
                                            app.config["SECRET_KEY"])
                     return jsonify({"Token": new_token.decode('UTF-8')})
         return jsonify({"Message": "Invalid credentials"})
@@ -263,6 +264,22 @@ class Users:
             return make_response(jsonify({
                 "Error": "Error registering"
             }))
+
+    def register_admin(self):
+        """Signup Admin"""
+        password = generate_password_hash('25s#sssA4', method="sha256")
+        try:
+            self.cur.execute("SELECT * FROM users WHERE email= '{0}'".format('peterkelvin@storemanager.com'))
+            if self.cur.fetchone():
+                pass
+            insert_query = """INSERT INTO users (first_name, last_name, email, role, password, date_created) VALUES
+                            (%s,%s, %s,%s,%s,%s)"""
+            self.cur.execute(insert_query,
+                             ('peter', 'kelvin', 'peterkelvin@storemanager.com', "true", password, now))
+            self.conn.commit()
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            pass
 
     @login_required
     def log_out(self, current_user, token):
