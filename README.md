@@ -50,7 +50,7 @@ Here is a list of all endpoints for store manager API
 
 Endpoint | Functionality 
 ------------ | -------------
-POST   /api/v2/auth/signup | Register a user
+1.POST   /api/v2/auth/signup | Register a user
 POST   /api/v2/auth/login | Log in user
 POST   /api/v2/auth/logout | Log out user
 POST  /api/v2/products | Add a product
