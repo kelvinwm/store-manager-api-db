@@ -64,8 +64,8 @@ GET  /api/v2/sales/id | Get a single sale record
 PUT  /api/v2/sales/id | Update a single sale record
 DELETE  /api/v2/sales/id | Delete a single sale record
 1.POST /api/v2/auth/signup |	Register a user
-2. POST /api/v2/auth/login	| Log in user
-3. POST /api/v2/auth/logout	| Log out user
+POST /api/v2/auth/login	| Log in user
+POST /api/v2/auth/logout	| Log out user
 4. PUT /api/v2/users/id |	Update user role
 5. GET /api/v2/users	| get all registered users
 6. POST /api/v2/category	| Add a category
