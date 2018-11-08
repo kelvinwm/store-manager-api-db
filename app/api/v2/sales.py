@@ -82,7 +82,7 @@ class SalesModel:
                                  (current_user['username'], product_id, product["quantity"], total_price, self.now))
                 self.conn.commit()
                 sold_list.append(str(quantity) + " " + product["product_name"] + " at " + str(price) + " = " +
-                                 str(total_price) + "  remaining stock " + str(new_quantity))
+                                 str(total_price))
                 total_cost += total_price
             return make_response(jsonify({
                 "Message": "Sales created successfully",
