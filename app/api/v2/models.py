@@ -30,7 +30,9 @@ def login_required(func):
             if cur.fetchone():
                 return jsonify({"message": "You are logged out, please login"})
         if not token:
-            return "No token"
+            return make_response(jsonify({
+                "message": "Please login"
+            }))
         try:
             current_user = jwt.decode(token, app.config["SECRET_KEY"])
         except:
