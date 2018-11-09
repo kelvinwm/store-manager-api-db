@@ -212,7 +212,7 @@ class Users:
                     new_token = jwt.encode({"role": role[0], "username": data["email"],
                                             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=43800)},
                                            app.config["SECRET_KEY"])
-                    return jsonify({"Token": new_token.decode('UTF-8')})
+                    return jsonify({"Token": new_token.decode('UTF-8'), "role": role[0]})
         return jsonify({"message": "Invalid credentials"})
 
     @login_required
