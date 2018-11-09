@@ -16,7 +16,7 @@ class TestProducts(BaseTest):
         create_tables()
         response = self.app.post('/api/v2/products', data=json.dumps(self.add_product), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], "Product added successfully")
+        self.assertEqual(result["message"], "Product added successfully")
         self.assertEqual(response.status_code, 201)
 
     def test_invalid_add_product(self):
@@ -31,7 +31,7 @@ class TestProducts(BaseTest):
         self.assertEqual(result.status_code, 200)
         response = self.app.get('/api/v2/products/11', headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], "Item does not exist")
+        self.assertEqual(result["message"], "Item does not exist")
 
     def test_product_list_can_be_edited(self):
         """TEST API can edit existing product list"""
@@ -39,7 +39,7 @@ class TestProducts(BaseTest):
         self.assertEqual(result.status_code, 200)
         res = self.app.put('/api/v2/products/21', data=json.dumps(self.product_not_found), headers=self.headers)
         result = json.loads(res.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Product not found')
+        self.assertEqual(result["message"], 'Product not found')
 
     def test_product_list_deletion(self):
         """TEST API can delete existing product list item"""
@@ -47,4 +47,4 @@ class TestProducts(BaseTest):
         self.assertEqual(result.status_code, 200)
         res = self.app.get('/api/v2/products/2', data=json.dumps(self.add_product), headers=self.headers)
         result = json.loads(res.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Item does not exist')
+        self.assertEqual(result["message"], 'Item does not exist')

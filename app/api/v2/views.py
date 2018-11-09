@@ -86,7 +86,7 @@ class Home(Resource):
     """Home page"""
 
     def get(self):
-        return make_response(jsonify({"Message": " Welcome to store manager api"}), 200)
+        return make_response(jsonify({"message": " Welcome to store manager api"}), 200)
 
 
 class AllUserInformation(Resource):

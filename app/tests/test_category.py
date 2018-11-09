@@ -17,14 +17,14 @@ class TestCategories(BaseTest):
         create_tables()
         response = self.app.post('/api/v2/category', data=json.dumps(self.category), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], "category added successfully")
+        self.assertEqual(result["message"], "category added successfully")
         self.assertEqual(response.status_code, 201)
 
     def test_category_list_can_be_edited(self):
         """TEST API can edit existing category list"""
         response = self.app.put('/api/v2/category/1', data=json.dumps({"category": "klb"}), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Updated successfully')
+        self.assertEqual(result["message"], 'Updated successfully')
         self.assertEqual(response.status_code, 200)
 
     def test_delete_category(self):
