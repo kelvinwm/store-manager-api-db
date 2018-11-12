@@ -4,16 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/api/v2/models.py" line="489" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v2/sales.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/sales.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v2/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_category.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_category.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_sales.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_sales.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_users_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_users_auth.py" afterDir="false" />
-    </list>
+    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,20 +14,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sales.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sales.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/api/v2/sales.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="175" column="83" lean-forward="true" selection-start-line="175" selection-start-column="83" selection-end-line="175" selection-end-column="83" />
+            <state relative-caret-position="186">
+              <caret line="182" column="55" lean-forward="true" selection-start-line="182" selection-start-column="55" selection-end-line="182" selection-end-column="55" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/api/v2/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2193">
-              <caret line="133" column="64" selection-start-line="133" selection-start-column="64" selection-end-line="133" selection-end-column="64" />
+            <state relative-caret-position="190">
+              <caret line="124" column="63" lean-forward="true" selection-start-line="121" selection-start-column="8" selection-end-line="124" selection-end-column="63" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -166,7 +157,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="786" />
     <option name="height" value="735" />
@@ -249,17 +240,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18080357" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18080357" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32838285" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.24917492" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.24917492" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -598,16 +589,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="133" column="64" selection-start-line="133" selection-start-column="64" selection-end-line="133" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7667">
@@ -617,8 +598,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/api/v2/sales.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="175" column="83" lean-forward="true" selection-start-line="175" selection-start-column="83" selection-end-line="175" selection-end-column="83" />
+        <state relative-caret-position="186">
+          <caret line="182" column="55" lean-forward="true" selection-start-line="182" selection-start-column="55" selection-end-line="182" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="124" column="63" lean-forward="true" selection-start-line="121" selection-start-column="8" selection-end-line="124" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
