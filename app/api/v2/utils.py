@@ -5,8 +5,6 @@ from flask_restful import reqparse
 from db_init import connection
 
 
-
-
 class Validate:
     def __init__(self, current_user, action):
         self.current_user = current_user
