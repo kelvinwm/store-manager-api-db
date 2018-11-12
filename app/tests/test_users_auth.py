@@ -13,7 +13,7 @@ class TestUsersAuth(BaseTest):
         delete_record(self.sign_up_data["email"])
         response = self.app.post('/api/v2/auth/signup', data=json.dumps(self.sign_up_data), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], "User successfully registered")
+        self.assertEqual(result["message"], "User successfully registered")
 
     def test_valid_login(self):
         """TEST API can sign up users correctly"""
@@ -26,18 +26,18 @@ class TestUsersAuth(BaseTest):
         response = self.app.post('/api/v2/auth/signup', data=json.dumps(self.invalid_sign_up_data),
                                  headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result['Message'], "Invalid email")
+        self.assertEqual(result['message'], "Invalid email")
 
     def test_empty_credentials_login(self):
         """TEST API can sign up users correctly"""
         response = self.app.post('/api/v2/auth/login', data=json.dumps(self.empty_login_data),
                                  content_type='application/json')
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], "Please enter all credentials")
+        self.assertEqual(result["message"], "Please enter all credentials")
 
     def test_invalid_login(self):
         """TEST API can sign up users correctly"""
         response = self.app.post('/api/v2/auth/login', data=json.dumps(self.invalid_login_data),
                                  content_type='application/json')
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], "Invalid credentials")
+        self.assertEqual(result["message"], "Invalid credentials")

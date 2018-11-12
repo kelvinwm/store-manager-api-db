@@ -19,20 +19,20 @@ def login_required(func):
 
     @functools.wraps(func)
     def user_auth(*args):
-        global token
+        token = ""
         conn = connection()
         cur = conn.cursor()
         if 'access-token' in request.headers:
             token = request.headers['access-token']
             cur.execute("SELECT * FROM blacklists WHERE token= '{0}'".format(token))
             if cur.fetchone():
-                return jsonify({"Message": "You are logged out, please login"})
-        if not token:
-            return "No token"
+                return jsonify({"message": "You are logged out, please login"})
+        if token == "":
+            return {"message": "Your time has expired, please login"}
         try:
             current_user = jwt.decode(token, app.config["SECRET_KEY"])
         except:
-            return {"Message": "Your time has expired, please login"}
+            return {"message": "Your time has expired, please login"}
         return func(*args, current_user, token)
 
     return user_auth
@@ -54,7 +54,7 @@ class ProductsModel:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Nothing has been stored yet"
+                    "message": "Nothing has been stored yet"
                 }), 200)
             for row in rows:
                 item = {
@@ -72,7 +72,7 @@ class ProductsModel:
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))
 
     @login_required
@@ -88,21 +88,21 @@ class ProductsModel:
             %s,%s,%s,%s)"""
             self.cur.execute("SELECT * FROM products WHERE product_name= '{0}'".format(data["product_name"].lower()))
             if self.cur.fetchone():
-                return jsonify({"Message": "Product already exists"})
+                return jsonify({"message": "Product already exists"})
             self.cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"].lower()))
             if not self.cur.fetchone():
-                return jsonify({"Message": "Invalid category"})
+                return jsonify({"message": "Invalid category"})
             self.cur.execute(insert_query, (data["product_name"].lower(), data["category"].lower(),
                                             data["quantity"].lower(), data["price"].lower(), now))
             self.conn.commit()
             return make_response(jsonify({
                 "product": data,
-                "Message": "Product added successfully"
+                "message": "Product added successfully"
             }), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))
 
     @login_required
@@ -115,7 +115,7 @@ class ProductsModel:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Item does not exist"
+                    "message": "Item does not exist"
                 }), 200)
             for row in rows:
                 item = {
@@ -134,7 +134,7 @@ class ProductsModel:
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))
 
     @login_required
@@ -151,7 +151,7 @@ class ProductsModel:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Product not found"
+                    "message": "Product not found"
                 }), 200)
             for row in rows:
                 category = row[2]
@@ -182,7 +182,7 @@ class ProductsModel:
             self.conn.commit()
             return make_response(jsonify({
                 "status": "OK",
-                "Message": "Updated successfully"
+                "message": "Updated successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return {"Error": "Unable to update product try again!"}
@@ -200,12 +200,12 @@ class ProductsModel:
             self.cur.execute(query)
             self.conn.commit()
             return make_response(jsonify({
-                "Message": "Product deleted successfully"
+                "message": "Product deleted successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))
 
 
@@ -220,7 +220,7 @@ class Users:
         """A user can login and get a token"""
         data = request.get_json()
         if not data or not data["email"] or not data["password"]:
-            return jsonify({"Message": "Please enter all credentials"})
+            return jsonify({"message": "Please enter all credentials"})
         self.cur.execute("SELECT password FROM users WHERE email= '{0}'".format(data["email"]))
         for row in self.cur.fetchall():
             if check_password_hash(row[0], data["password"]):
@@ -228,10 +228,10 @@ class Users:
                 self.cur.execute("SELECT role FROM users WHERE email= '{0}'".format(data["email"]))
                 for role in self.cur.fetchall():
                     new_token = jwt.encode({"role": role[0], "username": data["email"],
-                                            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=87600)},
+                                            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=200)},
                                            app.config["SECRET_KEY"])
-                    return jsonify({"Token": new_token.decode('UTF-8')})
-        return jsonify({"Message": "Invalid credentials"})
+                    return jsonify({"Token": new_token.decode('UTF-8'), "role": role[0]})
+        return jsonify({"message": "Invalid credentials"})
 
     @login_required
     def add_user(self, current_user, token):
@@ -241,15 +241,15 @@ class Users:
             return validate.validate_user()
         data = request.get_json()
         if not re.match('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$])', data["password"]):
-            return jsonify({"Message": "password should include a digit, Uppercase, lowercase and a special character"})
+            return jsonify({"message": "password should include a digit, Uppercase, lowercase and a special character"})
         if len(data["password"]) < 8:
-            return jsonify({"Message": "Password should be at least 8 characters"})
+            return jsonify({"message": "Password should be at least 8 characters"})
         pws = data["password"]
         password = generate_password_hash(pws, method="sha256")
         try:
             self.cur.execute("SELECT * FROM users WHERE email= '{0}'".format(data["email"].lower()))
             if self.cur.fetchone():
-                return jsonify({"Message": "User already registered"})
+                return jsonify({"message": "User already registered"})
             insert_query = """INSERT INTO users (first_name, last_name, email, role, password, date_created) VALUES
                          (%s,%s, %s,%s,%s,%s)"""
             self.cur.execute(insert_query,
@@ -258,7 +258,7 @@ class Users:
             self.conn.commit()
             return make_response(jsonify({
                 "status": "OK",
-                "Message": "User successfully registered"
+                "message": "User successfully registered"
             }), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
@@ -288,11 +288,11 @@ class Users:
             insert_query = """INSERT INTO blacklists (token, date_created) VALUES (%s,%s)"""
             self.cur.execute(insert_query, (token, now))
             self.conn.commit()
-            return make_response(jsonify({"Message": "User logout successful"}), 201)
+            return make_response(jsonify({"message": "User logout successful"}), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": "Error blacklisting token"
+                "message": "Error blacklisting token"
             }))
 
     @login_required
@@ -307,7 +307,7 @@ class Users:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Nothing has been stored yet"
+                    "message": "Nothing has been stored yet"
                 }), 200)
             for row in rows:
                 item = {
@@ -325,7 +325,7 @@ class Users:
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))
 
     @login_required
@@ -339,7 +339,7 @@ class Users:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "User does not exist"
+                    "message": "User does not exist"
                 }), 200)
             for row in rows:
                 one_user = {
@@ -356,7 +356,7 @@ class Users:
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))
 
     @login_required
@@ -373,7 +373,7 @@ class Users:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "User not found"
+                    "message": "User not found"
                 }), 200)
             for row in rows:
                 first_name = row[1]
@@ -394,7 +394,7 @@ class Users:
                 is_valid = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$',
                                     data["email"])
                 if not is_valid:
-                    return jsonify({"Message": "Invalid email"})
+                    return jsonify({"message": "Invalid email"})
                 email = data["email"].lower()
             if "role" in data:
                 user_role = data["role"].lower()
@@ -405,7 +405,7 @@ class Users:
             self.conn.commit()
             return make_response(jsonify({
                 "status": "OK",
-                "Message": "Updated successfully"
+                "message": "Updated successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return error
@@ -427,7 +427,7 @@ class Categories:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Nothing has been stored yet"
+                    "message": "Nothing has been stored yet"
                 }), 200)
             for row in rows:
                 item = {
@@ -442,7 +442,7 @@ class Categories:
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))
 
     @login_required
@@ -456,21 +456,21 @@ class Categories:
             return validate.admin_checker()
         data = request.get_json()
         if not data or not data["category"]:
-            return jsonify({"Message": "Invalid entry"})
+            return jsonify({"message": "Invalid entry"})
         try:
             insert_query = """INSERT INTO categories (category, date_created) VALUES (%s,%s)"""
             self.cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data["category"].lower()))
             if self.cur.fetchone():
-                return jsonify({"Message": "category already exists"})
+                return jsonify({"message": "category already exists"})
             self.cur.execute(insert_query, (data["category"].lower(), now))
             self.conn.commit()
             return make_response(jsonify({
                 "status": "OK",
-                "Message": "category added successfully"
+                "message": "category added successfully"
             }), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
-                "Message": "Error entering category"
+                "message": "Error entering category"
             }))
 
     @login_required
@@ -491,14 +491,14 @@ class Categories:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Category not found"
+                    "message": "Category not found"
                 }), 200)
             sql = """ UPDATE categories SET category = %s WHERE id = %s"""
             self.cur.execute(sql, (data["category"].lower(), category_id))
             self.conn.commit()
             return make_response(jsonify({
                 "status": "OK",
-                "Message": "Updated successfully"
+                "message": "Updated successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return error
@@ -512,15 +512,15 @@ class Categories:
         try:
             self.cur.execute("SELECT * FROM categories WHERE id= '{0}'".format(category_id))
             if not self.cur.fetchone():
-                return jsonify({"Message": "Item does not exist"})
+                return jsonify({"message": "Item does not exist"})
             query = "DELETE FROM categories WHERE id= '{0}'".format(category_id)
             self.cur.execute(query)
             self.conn.commit()
             return make_response(jsonify({
                 "status": "OK",
-                "Message": "category deleted successfully"
+                "message": "category deleted successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
-                "Message": "Error deleting category"
+                "message": "Error deleting category"
             }))

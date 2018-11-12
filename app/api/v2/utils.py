@@ -26,7 +26,7 @@ class Validate:
         if self.current_user != "true":
             return make_response(jsonify({
                 "Error": "You not allowed to " + self.action,
-                "Message": "Permission denied.Contact Admin"
+                "message": "Permission denied.Contact Admin"
             }))
         if not args['category']:
             return jsonify({"category": "Invalid entry"})
@@ -34,22 +34,22 @@ class Validate:
             return jsonify({"product name": "Invalid entry"})
         if args["price"] < 0:
             return make_response(jsonify({
-                "Message": "price cannot be a negative number"
+                "message": "price cannot be a negative number"
             }), 200)
         if args["quantity"] < 0:
             return make_response(jsonify({
-                "Message": "Quantity cannot be a negative number"
+                "message": "Quantity cannot be a negative number"
             }), 200)
         self.cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(args["category"].lower()))
         if not self.cur.fetchone():
-            return jsonify({"Message": "Invalid category"})
+            return jsonify({"message": "Invalid category"})
         return "true"
 
     def validate_user(self):
         if self.current_user != "true":
             return make_response(jsonify({
                 "Alert": "You are not allowed to " + self.action,
-                "Message": "Permission denied.Contact Admin"
+                "message": "Permission denied.Contact Admin"
             }))
         parser = reqparse.RequestParser()
         parser.add_argument("first_name", required=True, help="first name empty", location=['json'])
@@ -63,14 +63,14 @@ class Validate:
             return make_response(jsonify({"message": "Please enter email"}))
         is_valid = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', data["email"])
         if not is_valid:
-            return jsonify({"Message": "Invalid email"})
+            return jsonify({"message": "Invalid email"})
         return "true"
 
     def admin_checker(self):
         if self.current_user != "true":
             return make_response(jsonify({
                 "Denied": "You are not allowed to " + self.action,
-                "Message": "Permission denied.Contact Admin"
+                "message": "Permission denied.Contact Admin"
             }))
         return "true"
 
@@ -81,11 +81,11 @@ class Validate:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Item does not exist"
+                    "message": "Item does not exist"
                 }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
-                "Message": "error finding item"
+                "message": "error finding item"
             }))
 
         return "true"
@@ -104,12 +104,12 @@ class Validate:
             rows = self.cur.fetchall()
             if not rows:
                 return {"Error": "Product " + product["product_name"] + " does not exist",
-                        "Message": "Add this product"}
+                        "message": "Add this product"}
             for row in rows:
                 product_name = row[1]
                 quantity = int(row[3])
             if int(product["quantity"]) > quantity:
-                return {"Message": product["product_name"] + " out of stock",
+                return {"message": product["product_name"] + " out of stock",
                         "Remaining " + product_name: quantity, "Hint": "restock"}
         return "ok"
 
@@ -118,7 +118,11 @@ class Validate:
             return {"Alert": "please enter " + key_value}
         if key_value == "quantity" or key_value == "price":
             if int(data[key_value]) < 0:
-                return key_value + " cannot be a negative value"
+                return {"message": key_value + " cannot be a negative value"}
+        if key_value == "category":
+            self.cur.execute("SELECT * FROM categories WHERE category= '{0}'".format(data[key_value].lower()))
+            if not self.cur.fetchone():
+                return jsonify({"message": "Invalid category"})
         return "done"
 
     def validate_get_sales(self, current_user):

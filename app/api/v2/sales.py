@@ -24,7 +24,7 @@ class SalesModel:
         try:
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Nothing has been stored yet"
+                    "message": "Nothing has been stored yet"
                 }), 200)
             for row in rows:
                 item = {
@@ -41,7 +41,7 @@ class SalesModel:
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
-                "Message": "Error retrieving sales"
+                "message": "Error retrieving sales"
             }))
 
     @login_required
@@ -85,13 +85,13 @@ class SalesModel:
                                  str(total_price))
                 total_cost += total_price
             return make_response(jsonify({
-                "Message": "Sales created successfully",
+                "message": "Sales created successfully",
                 "Remaining": sold_list,
                 "Total cost": str(total_cost)
             }), 201)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
-                "Message": "error"
+                "message": "error"
             }))
 
     @login_required
@@ -107,7 +107,7 @@ class SalesModel:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Item does not exist"
+                    "message": "Item does not exist"
                 }), 200)
             for row in rows:
                 item = {
@@ -124,7 +124,7 @@ class SalesModel:
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
-                "Message": "error getting the sale"
+                "message": "error getting the sale"
             }))
 
     @login_required
@@ -142,7 +142,7 @@ class SalesModel:
             rows = self.cur.fetchall()
             if not rows:
                 return make_response(jsonify({
-                    "Message": "Product not found"
+                    "message": "Product not found"
                 }), 200)
             for row in rows:
                 quantity = int(row[3])
@@ -161,7 +161,7 @@ class SalesModel:
             self.conn.commit()
             return make_response(jsonify({
                 "status": str(price),
-                "Message": "Updated successfully"
+                "message": "Updated successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return {"Error": "Unable to  sale try again!"}
@@ -175,15 +175,15 @@ class SalesModel:
         try:
             self.cur.execute("SELECT * FROM sales WHERE id= '{0}'".format(sale_id))
             if not self.cur.fetchone():
-                return jsonify({"Message": "Item does not exist"})
+                return jsonify({"message": "Item does not exist"})
             query = "DELETE FROM sales WHERE id= '{0}'".format(sale_id)
             self.cur.execute(query)
             self.conn.commit()
             return make_response(jsonify({
-                "Message": "Sales deleted successfully"
+                "message": "Sales deleted successfully"
             }), 200)
         except (Exception, psycopg2.DatabaseError) as error:
             return make_response(jsonify({
                 "status": "OK",
-                "Message": error
+                "message": error
             }))

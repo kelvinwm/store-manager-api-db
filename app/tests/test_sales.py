@@ -14,14 +14,14 @@ class TestSales(BaseTest):
         """TEST API can add sale to list properly"""
         response = self.app.post('/api/v2/sales', data=json.dumps(self.add_sale), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Sales created successfully')
+        self.assertEqual(result["message"], 'Sales created successfully')
         self.assertEqual(response.status_code, 201)
 
     def test_invalid_add_sale(self):
         """TEST API can add sale to list properly"""
         response = self.app.post('/api/v2/sales', data=json.dumps(self.sale_err_data), headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Add this product')
+        self.assertEqual(result["message"], 'Add this product')
 
     def test_excess_quantity_sale(self):
         """TEST API can add sale to list properly"""
@@ -35,7 +35,7 @@ class TestSales(BaseTest):
         self.assertEqual(result.status_code, 200)
         response = self.app.get('/api/v2/sales/1111', headers=self.headers)
         result = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(result["Message"], "Item does not exist")
+        self.assertEqual(result["message"], "Item does not exist")
 
     def test_sale_list_can_be_edited(self):
         """TEST API can edit existing sale list"""
@@ -43,7 +43,7 @@ class TestSales(BaseTest):
         self.assertEqual(result.status_code, 200)
         res = self.app.put('/api/v2/sales/281', data=json.dumps(self.add_sale), headers=self.headers)
         result = json.loads(res.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Product not found')
+        self.assertEqual(result["message"], 'Product not found')
 
     def test_sale_list_deletion(self):
         """TEST API can delete existing sale list item"""
@@ -51,4 +51,4 @@ class TestSales(BaseTest):
         self.assertEqual(result.status_code, 200)
         res = self.app.get('/api/v2/sales/2', data=json.dumps(self.add_sale), headers=self.headers)
         result = json.loads(res.data.decode('utf-8'))
-        self.assertEqual(result["Message"], 'Item does not exist')
+        self.assertEqual(result["message"], 'Item does not exist')
