@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/app/api/v2/models.py" line="445" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="" />
+=======
+  <component name="ChangeListManager">
+    <list default="true" id="3372c1b9-6e41-4700-a174-c8cff308ba10" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/api/v2/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/v2/models/categories_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/v2/models/products_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/v2/views/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/v2/views/categories_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/v2/views/products_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/v2/views/sales_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v2/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/models/users_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v2/sales.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v2/models/sales_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v2/views.py" beforeDir="false" />
+    </list>
+>>>>>>> develop
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +33,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
+=======
+      <file leaf-file-name="sales_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/api/v2/models/sales_model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1462">
+              <caret line="92" column="42" selection-start-line="92" selection-start-column="42" selection-end-line="92" selection-end-column="42" />
+>>>>>>> develop
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/app/api/v2/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+              <folding>
+=======
         <entry file="file://$PROJECT_DIR$/app/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
@@ -26,18 +72,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/api/v2/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="187">
+              <caret line="11" column="52" lean-forward="true" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
               <folding>
+>>>>>>> develop
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="db_init.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/db_init.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -45,6 +93,32 @@
               <caret line="6" column="60" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="6" selection-end-column="60" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
+=======
+      <file leaf-file-name="users_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/api/v2/models/users_model.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="sales_views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/api/v2/views/sales_views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" selection-end-line="34" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="users_views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/api/v2/views/users_views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+>>>>>>> develop
               </folding>
             </state>
           </provider>
@@ -61,6 +135,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
       <find>validate_sale</find>
       <find>product_name</find>
       <find>Hint</find>
@@ -78,19 +153,43 @@
       <find>validate_product</find>
       <find>contac</find>
       <find>admin_checker</find>
+=======
+>>>>>>> develop
       <find>contact</find>
       <find>validate_user</find>
-      <find>cate</find>
-      <find>admin</find>
-      <find>update</find>
       <find>rows</find>
       <find>first</find>
       <find>login</find>
       <find>user</find>
       <find>users</find>
       <find>UserL</find>
+<<<<<<< HEAD
       <find>Message</find>
       <find>no</find>
+=======
+      <find>conn</find>
+      <find>print</find>
+      <find>Products</find>
+      <find>data2</find>
+      <find>admin</find>
+      <find>now</find>
+      <find>cur</find>
+      <find>enc</find>
+      <find>ca</find>
+      <find>out of stock</find>
+      <find>stock</find>
+      <find>Message</find>
+      <find>quan</find>
+      <find>minu</find>
+      <find>quantity cannot be a negative value</find>
+      <find>quantity</find>
+      <find>alert</find>
+      <find>please enter quantity</find>
+      <find>update</find>
+      <find>update_p</find>
+      <find>cannot</find>
+      <find>cate</find>
+>>>>>>> develop
     </findStrings>
     <replaceStrings>
       <replace />
@@ -99,6 +198,12 @@
       <replace>sales</replace>
       <replace>sale</replace>
       <replace>klb</replace>
+<<<<<<< HEAD
+=======
+      <replace>self.conn</replace>
+      <replace>self.now</replace>
+      <replace>self.cur</replace>
+>>>>>>> develop
       <replace>message</replace>
     </replaceStrings>
   </component>
@@ -115,6 +220,7 @@
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/app/tests/test.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/tests/base_test.py" />
         <option value="$PROJECT_DIR$/app/tests/test_sales.py" />
         <option value="$PROJECT_DIR$/app/tests/test_category.py" />
@@ -127,6 +233,28 @@
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/db_init.py" />
         <option value="$PROJECT_DIR$/app/api/v2/models.py" />
+=======
+        <option value="$PROJECT_DIR$/app/api/v2/views.py" />
+        <option value="$PROJECT_DIR$/db_init.py" />
+        <option value="$PROJECT_DIR$/app/tests/base_test.py" />
+        <option value="$PROJECT_DIR$/app/tests/test_category.py" />
+        <option value="$PROJECT_DIR$/app/tests/test_product.py" />
+        <option value="$PROJECT_DIR$/app/tests/test_sales.py" />
+        <option value="$PROJECT_DIR$/app/tests/test_users_auth.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/models.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/utils.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/sales.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/models/sales_model.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/models/users_model.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/models/categories_model.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/models/products_model.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/views/categories_views.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/views/products_views.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/views/sales_views.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/views/users_views.py" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
+        <option value="$PROJECT_DIR$/app/api/v2/__init__.py" />
+>>>>>>> develop
       </list>
     </option>
   </component>
@@ -154,6 +282,38 @@
               <item name="store-manager-api-db" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
+=======
+            <path>
+              <item name="store-manager-api-db" type="b2602c69:ProjectViewProjectNode" />
+              <item name="store-manager-api-db" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="store-manager-api-db" type="b2602c69:ProjectViewProjectNode" />
+              <item name="store-manager-api-db" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="v2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="store-manager-api-db" type="b2602c69:ProjectViewProjectNode" />
+              <item name="store-manager-api-db" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="v2" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="store-manager-api-db" type="b2602c69:ProjectViewProjectNode" />
+              <item name="store-manager-api-db" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="v2" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+>>>>>>> develop
           </expand>
           <select />
         </subPane>
@@ -161,15 +321,20 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../CHALLENGE ONE/store-manager" />
+  </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db\app\api\v2" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db\app\tests" />
       <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db\app\api\v2" />
       <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db\app\api" />
       <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db\app\api\v2\views" />
+      <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db\app\api\v2\models" />
+      <recent name="F:\Andela\CHALLENGE THREE\store-manager-api-db\app\api\v2" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -198,17 +363,24 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14211309" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14211309" />
+>>>>>>> develop
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32838285" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.4389439" />
+=======
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.4389439" />
+>>>>>>> develop
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -229,32 +401,19 @@
       <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.4669967" />
       <window_info anchor="bottom" id="Python Console" order="7" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18080357" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32838285" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.4669967" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -265,7 +424,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/views.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/users_views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
@@ -286,6 +445,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -325,6 +485,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
+=======
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/users_model.py">
+>>>>>>> develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
@@ -341,7 +504,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/views.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/users_views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
@@ -362,7 +525,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/users_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
@@ -372,14 +535,14 @@
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/views.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/users_views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="25" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/users_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
@@ -403,14 +566,14 @@
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/views.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/users_views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/users_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="33" lean-forward="true" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
@@ -452,9 +615,12 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/api/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+=======
+>>>>>>> develop
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1765" />
@@ -480,6 +646,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/instance/config.py">
       <provider selected="true" editor-type-id="text-editor" />
+<<<<<<< HEAD
     </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -509,11 +676,94 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="66" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tests/test_category.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tests/test_product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/tests/test_sales.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tests/test_users_auth.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tests/base_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="129" column="23" lean-forward="true" selection-start-line="129" selection-start-column="23" selection-end-line="129" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/categories_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/products_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="11" column="27" selection-end-line="179" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+>>>>>>> develop
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/sales_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="382">
           <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
         </state>
@@ -523,11 +773,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
+=======
+        <state relative-caret-position="1462">
+          <caret line="92" column="42" selection-start-line="92" selection-start-column="42" selection-end-line="92" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/v2/utils.py">
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/categories_views.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="18" selection-end-line="31" selection-end-column="57" />
+>>>>>>> develop
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/products_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="2006">
           <caret line="118" column="77" selection-start-line="118" selection-start-column="77" selection-end-line="118" selection-end-column="77" />
         </state>
@@ -546,10 +808,37 @@
           <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
+=======
+        <state relative-caret-position="306">
+          <caret line="19" column="24" selection-end-line="35" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/models/users_model.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/sales_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-end-line="34" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/v2/views/users_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+>>>>>>> develop
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/tests/base_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="625">
@@ -563,10 +852,19 @@
           <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+>>>>>>> develop
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/api/v2/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -580,6 +878,14 @@
           <caret line="6" column="60" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="6" selection-end-column="60" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/api/v2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="52" lean-forward="true" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+>>>>>>> develop
           </folding>
         </state>
       </provider>

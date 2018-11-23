@@ -4,7 +4,7 @@ from flask import make_response, jsonify, request
 from flask_restful import reqparse
 from app.api.v2.utils import Validate
 from db_init import connection
-from app.api.v2.models import login_required
+from app.api.v2.models.users_model import login_required
 
 
 class SalesModel:
