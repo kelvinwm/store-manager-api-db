@@ -1,8 +1,11 @@
 from flask import Blueprint
 from flask_restful import Api
-from app.api.v2.views import (Products, Product, Home, UserSignup, UserLogin, UserLogout,
-                              AllUserInformation, SingleUserInformation, CategoriesModel,
-                              SingleCategory, Sales, Sale)
+
+from app.api.v2.views.categories_views import CategoriesModel, SingleCategory
+from app.api.v2.views.products_views import Products, Product
+from app.api.v2.views.sales_views import Sales, Sale
+from app.api.v2.views.users_views import (Home, UserSignup, UserLogin,
+                                          UserLogout, AllUserInformation, SingleUserInformation, SingleUserInformation)
 
 version_2 = Blueprint("version_2", __name__)
 api = Api(version_2)

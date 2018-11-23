@@ -4,7 +4,7 @@ from flask import make_response, jsonify, request
 from flask_restful import reqparse
 from app.api.v2.utils import Validate
 from db_init import connection
-from app.api.v2.models import login_required
+from app.api.v2.models.users_model import login_required
 
 
 class SalesModel:
@@ -86,7 +86,7 @@ class SalesModel:
                 total_cost += total_price
             return make_response(jsonify({
                 "message": "Sales created successfully",
-                "Remaining": sold_list,
+                "Remaining": new_quantity,
                 "Total cost": str(total_cost)
             }), 201)
         except (Exception, psycopg2.DatabaseError) as error:
